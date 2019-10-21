@@ -1,0 +1,19 @@
+Ticket to Ride
+How they assigned point values to lengths, paths between cities
+How we built the graph
+How we assigned weights
+Different metrics of path distances:
+• effective resistance
+
+-----------------------
+
+Probability background
+Graph theory background
+Rules
+Goals
+Edge weights/rewards
+• how they assigned
+• how we suggest assigning (expected turns to reach)
+Path weights/rewards
+• how they assigned
+• how we suggest assigning (effective resistance)

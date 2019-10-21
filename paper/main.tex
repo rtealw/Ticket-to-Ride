@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{varioref}
+\usepackage{verbatim} 
+\usepackage{multicol}
+\usepackage{enumerate}
+\usepackage[normalem]{ulem}
+%\usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{thm-restate}
+\usepackage{enumitem}
+
+
+
+\usepackage{mathrsfs}
+
+\usepackage{url}\urlstyle{same}
+\usepackage{xspace}
+\usepackage{thm-restate}
+
+% Nicer font
+\usepackage{mathpazo}
+
+
+% Microtype
+\usepackage{microtype}
+
+% TikZ
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+
+% Support eps figures
+\usepackage{epstopdf}
+
+% Hypertext package
+\usepackage[colorlinks = true]{hyperref}
+% Title and authors
+%\hypersetup{
+%  pdftitle = {},
+%  pdfauthor = {}
+%}
+% Color definitions
+\usepackage{xcolor}
+\definecolor{darkred}  {rgb}{0.5,0,0}
+\definecolor{darkblue} {rgb}{0,0,0.5}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+% Color links
+\hypersetup{
+  urlcolor   = blue,         % color of external links
+  linkcolor  = darkblue,     % color of internal links
+  citecolor  = darkgreen,    % color of links to bibliography
+  filecolor  = darkred       % color of file links
+}
+
+% Clever references
+\usepackage{cleveref}%[nameinlink]
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{definition}{Definition}{Definitions}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{section}{Section}{Sections}
+%\crefname{property}{Property}{Properties}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{figure}{Fig.}{Figs.}
+\crefname{equation}{Eq.}{Eqs.}
+\crefname{table}{Table}{Tables}
+\crefname{claim}{Claim}{Claims}
+%\crefname{item}{Property}{Properties}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%  N E W T H E O R E M  %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{property}[theorem]{Property}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{problem}{Problem}
+\newtheorem{claim}[theorem]{Claim}
+\theoremstyle{definition}
+\newtheorem*{remark}{Remark}
+\newtheorem*{example}{Example}
+
+\DeclareMathOperator{\E}{\mathrm{E}}		     % expected value
+\DeclareMathOperator{\p}{\mathrm{P}}		     % probability
+
+\begin{document}
+
+
+%+Title
+\title{Applications of Graph Theory and Probability in the Board Game \it{Ticket to Ride}}
+
+\author{R. Teal Witter \& Alex Lyford}
+
+\date{\today}
+%\date{\today}
+
+\maketitle
+%-Title
+
+\section{Introduction}
+
+\input{sections/background.tex}
+\input{sections/routes.tex}
+\input{sections/resistance.tex}
+\input{sections/betweenness.tex}
+
+\bibliographystyle{abbrv}
+\bibliography{main}
+
+\end{document}

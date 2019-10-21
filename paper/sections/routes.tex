@@ -1,0 +1,113 @@
+\section{Value of Routes}
+\subsection{Current Route Value}
+There are two factors that encourage players to buy longer routes:
+
+- the reward per train is much higher for longer routes and
+
+- only one route can be purchased per a turn so it is more efficient
+to buy longer routes.
+
+\begin{table}[h!]
+\renewcommand{\arraystretch}{1.5}
+\centering
+\begin{tabular}{| c | c | c | c | c | c | c |}
+\hline
+ Route Length & 1 & 2 & 3 & 4 & 5 & 6\\
+ \hline
+ Points Scored & 1 & 2 & 4 & 7 & 10 & 15\\
+ \hline
+\end{tabular}
+\caption{The current values of routes.}
+\label{table:current_value}
+\end{table}
+From \cref{table:current_value} we see that 
+the trains in the two shortest routes are each worth only one point
+whereas the trains in the longest route are worth two and a half points.
+The ostensible reason for the increasing value per train is that the
+difficulty of collecting trains grows faster than the number of trains $k$.
+The most intuitive way to quantify the difficulty of collecting $k$ trains
+is the expected number of turns a player needs to collect them.
+However, in \cref{sec:collecting_cards}, 
+we show that the expected number of cards
+until we get $k$ of a specific color is linear with $k$.
+
+\subsection{Collecting Cards}\label{sec:collecting_cards}
+Let $C$ be the set of all cards.
+Our goal is to find the expected time until
+we have collected $k$ of a specific
+color of cards where $k$ is a fixed
+integer between 1 and 6 inclusive.
+Without loss of generality, say we are
+looking for blue cards and
+call $B$ the set of blue cards.
+In order to find how long it takes to collect $k$ blue cards,
+think of our well-shuffled deck as
+blue cards separated by non-blue cards.
+For example, we may have the ordering
+\begin{align}
+    xxxbxbxxxx...xxbxxx \nonumber
+\end{align}
+where $x \in C \setminus B$ and $b \in B$.
+
+Now let $T$ be the number of cards until
+the $k^{th}$ blue card is drawn.
+Our strategy is to write $T$ in terms of $k$
+and indicator random variables.
+Let $I_x$ be the indicator that takes value 1
+if non-blue card $x$ appears before the $k^{th}$ blue card
+and 0 otherwise.
+Then
+\begin{align}
+    T = k + \sum_{x \in C \setminus B} I_x. \nonumber
+\end{align}
+
+We are interested in the average number of draws
+until we see $k$ blue cards
+so we take the expected value of $T$
+(distributing expectation over addition),
+\begin{align} \label{eq:expected_card}
+    \E[T] = \E[k] + (|C \setminus B|) \E[I_x].
+\end{align}
+We know that $k$ is fixed so its expected value is simply $k$.
+Then the only unknown is $\E[I_x]$.
+
+To find $\E[I_x]$ think of the deck as 13 sequences 
+of non-blue cards where adjacent sequences are
+separated by a single blue card.
+(It is possible for a sequence to be of length zero provided
+two blue cards are adjacent to each other.)
+Since we assume the deck is well-shuffled, the non-blue cards
+are uniformly distributed across each sequence;
+it is as likely for card $x$ to be in any one sequence
+as any other.
+
+Now think of whether a card appears before the $k^{th}$ blue
+in terms of which sequence it lives in.
+Card $x$ appears before the first blue if and only if it is 
+in the first sequence.
+The probability $x$ is in the first sequence is $1/13$
+so $x$ appears before the first blue with $1/13$ probability.
+(Recall that $x$ is uniformly distributed across all
+13 sequences.)
+Similarly, card $x$ appears before the $k^{th}$ blue if and only if
+it is in one of the first $k$ sequences.
+The probability $x$ is in the first $k$ sequences is $k/13$
+so $x$ appears before the $k^{th}$ blue with $k/13$ probability.
+By conditioning on whether $x$ appears before the $k^{th}$ blue,
+we may write
+\begin{align} \label{eq:expected_indicator}
+    \E[I_x] &= 1 \times 
+    \p(\textrm{$x$ appears before the $k^{th}$ blue}) +
+    0 \times \p(\textrm{$x$ appears after the $k^{th}$ blue})
+    \nonumber \\
+    &= \p(\textrm{$x$ appears before the $k^{th}$ blue})
+    = k/13.
+\end{align}
+
+With \cref{eq:expected_card} and \cref{eq:expected_indicator},
+\begin{align}
+    \E[T] &= k + (|C \setminus B|) k/13 \nonumber \\
+    &= k \left(1 + \frac{|C| - |B|}{13}\right). \nonumber
+\end{align}
+
+\subsection{Converting Cards to Turns}\label{sec:converting}
