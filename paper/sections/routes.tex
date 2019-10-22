@@ -7,19 +7,6 @@ There are two factors that encourage players to buy longer routes:
 - only one route can be purchased per a turn so it is more efficient
 to buy longer routes.
 
-\begin{table}[h!]
-\renewcommand{\arraystretch}{1.5}
-\centering
-\begin{tabular}{| c | c | c | c | c | c | c |}
-\hline
- Route Length & 1 & 2 & 3 & 4 & 5 & 6\\
- \hline
- Points Scored & 1 & 2 & 4 & 7 & 10 & 15\\
- \hline
-\end{tabular}
-\caption{The current values of routes.}
-\label{table:current_value}
-\end{table}
 From \cref{table:current_value} we see that 
 the trains in the two shortest routes are each worth only one point
 whereas the trains in the longest route are worth two and a half points.
@@ -30,6 +17,21 @@ is the expected number of turns a player needs to collect them.
 However, in \cref{sec:collecting_cards}, 
 we show that the expected number of cards
 until we get $k$ of a specific color is linear with $k$.
+
+\begin{table}[h!]
+\renewcommand{\arraystretch}{1.5}
+\centering
+\begin{tabular}{| c | c | c | c | c | c | c |}
+\hline
+ Route Length & 1 & 2 & 3 & 4 & 5 & 6\\
+ \hline
+ Points Scored & 1 & 2 & 4 & 7 & 10 & 15\\
+ \hline
+\end{tabular}
+\caption{The point reward for building routes
+of varying lengths.}
+\label{table:current_value}
+\end{table}
 
 \subsection{Collecting Cards}\label{sec:collecting_cards}
 Let $C$ be the set of all cards.
@@ -97,8 +99,8 @@ By conditioning on whether $x$ appears before the $k^{th}$ blue,
 we may write
 \begin{align} \label{eq:expected_indicator}
     \E[I_x] &= 1 \times 
-    \p(\textrm{$x$ appears before the $k^{th}$ blue}) +
-    0 \times \p(\textrm{$x$ appears after the $k^{th}$ blue})
+    \p(\textrm{$x$ appears before the $k^{th}$ blue}) \nonumber \\
+    &+ 0 \times \p(\textrm{$x$ appears after the $k^{th}$ blue})
     \nonumber \\
     &= \p(\textrm{$x$ appears before the $k^{th}$ blue})
     = k/13.

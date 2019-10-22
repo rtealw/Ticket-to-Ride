@@ -1,4 +1,5 @@
-\section{Background}
+\section{Introduction}
+\subsection{Background}
 People have been playing mathematical games
 since as early as 2000 B.C.
 \cite{cornelius1986historical}.
@@ -94,29 +95,57 @@ Our answer builds on existing results and
 and our own novel applications of mathematical concepts to enhance
 player strategies and propose a better scoring scheme.
 
-\begin{figure}[h]
+\subsection{\textit{Ticket to Ride} Gameplay}
+
+The goal of \textit{Ticket to Ride} is to collect
+the most points by the end of the game.
+There are three ways players may accumulate points:
+First, a player receives points for building routes
+on the board in \cref{fig:board}.
+The number of points scored is based on the length of the route.
+Second, a player receives points for building
+a set of routes that connect two cities.
+Points may only be scored for a pair of cities specified by a 
+Destination Ticket in the player's hand.
+Finally, a player receives points for building
+the longest path of cities at the end of the game.
+(A path connects two cities through a set
+of routes and may only use a single route exactly once.)
+
+\begin{figure}[ht]
 \centering
-\includegraphics[scale=.25]{figures/board}
+\includegraphics[scale=.2]{figures/board}
 \caption{The \textit{Ticket to Ride} U.S. board.}
+\label{fig:board}
 \end{figure}
 
-\subsection{Ticket to Ride}
-The goal is to collect as many points as possible before
-any player uses all of their 45 trains and ends the game.
-There are three ways players may earn points:
-1) by building routes on the board
-according to the number of trains in each route,
-2) by building a path of routes
-between two cities specified by a destination card in their possession,
-3) by owning the longest continuous path of cities at the end of the game.
+Each player begins the game with four random Train Car cards.
+These cards are used to buy routes.
+For example, a player can use four pink Train Car cards to purchase
+the route between Charleston and Miami
+(at the bottom right corner of \cref{fig:board}).
+At the beginning of the game 
+each player also receives three Destination Ticket cards.
+Two cities and a reward are specified on each Destination Ticket.
+Players choose either two or three of these cards and
+receive points at the end of the game based on whether
+or not they completed the Destination Ticket:
+if they connected the cities then they add the point reward to their
+total score and
+if they did not connect the cities they subtract the points from their
+total score.
 
-A player has three (mutually exclusive) options for what to do during
-their turn:
-1) draw train cards to build routes in later turns,
-2) claim a particular route by returning the appropriate
-number of trains of the specified color,
-3) draw destination cards in order to earn points for connecting
-distant cities.
-\subsection{Strategy Assumptions}
-We make several assumptions about how reasonable players
-play \textit{Ticket to Ride}.
+Players take one of three actions on their turns.
+First, a player may draw two Train Car cards either
+from the deck or from the five Train Car cards
+kept face up on the table. 
+(If a player chooses a wild card from the table
+then they are limited to one Train Car card.)
+Second, a player may claim a route by trading in
+the appropriate number and color of Train Car cards.
+The gray routes on the map are purchased with
+the appropriate number of any one color.
+If a pair of cities have two routes between them,
+no player can claim both.
+Finally, a player may draw three Destination Tickets
+and return up to two of them.
