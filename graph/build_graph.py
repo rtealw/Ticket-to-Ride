@@ -199,13 +199,16 @@ pairs = [{'city1':'toro', 'city2': 'miam', 'min_path': 10},{'city1': 'dulu', 'ci
          {'city1':'saul', 'city2': 'okla', 'min_path':  9},{'city1': 'calg', 'city2': 'salt', 'min_path':  7},{'city1': 'dulu', 'city2': 'elpa', 'min_path': 10},
          {'city1':'losa', 'city2': 'newy', 'min_path': 21},{'city1': 'mont', 'city2': 'newo', 'min_path': 13},{'city1': 'chic', 'city2': 'newo', 'min_path':  7},
          {'city1':'kans', 'city2': 'hous', 'min_path':  5},{'city1': 'calg', 'city2': 'phoe', 'min_path': 13},{'city1': 'losa', 'city2': 'miam', 'min_path': 20},
-         {'city1':'port', 'city2': 'nash', 'min_path': 17},{'city1': 'seat', 'city2': 'newy', 'min_path': 22},{'city1': 'winn', 'city2': 'hous', 'min_path': 11},
+         {'city1':'port', 'city2': 'nash', 'min_path': 17},{'city1': 'seat', 'city2': 'newy', 'min_path': 22},{'city1': 'winn', 'city2': 'litt', 'min_path': 11},
          {'city1':'seat', 'city2': 'losa', 'min_path':  9},{'city1': 'bost', 'city2': 'miam', 'min_path': 12},{'city1': 'winn', 'city2': 'hous', 'min_path': 12}]
 
 def min_path(pair):
     return pair['min_path']
 
 pairs.sort(key=min_path)
+for i in range(len(pairs)):
+    pair = pairs[i]
+    pair['number'] = str(i + 1).zfill(2)
 
 edge_lengths.to_csv('edge_lengths.csv')
 is_double.to_csv('is_double.csv')
