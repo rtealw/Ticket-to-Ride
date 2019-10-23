@@ -1,30 +1,30 @@
-{'city1': 'denv', 'city2': 'elpa', 'min_path': 4}
-{'city1': 'kans', 'city2': 'hous', 'min_path': 5}
-{'city1': 'newy', 'city2': 'atla', 'min_path': 6}
-{'city1': 'calg', 'city2': 'salt', 'min_path': 7}
-{'city1': 'chic', 'city2': 'newo', 'min_path': 7}
-{'city1': 'dulu', 'city2': 'hous', 'min_path': 8}
-{'city1': 'hele', 'city2': 'losa', 'min_path': 8}
-{'city1': 'saul', 'city2': 'nash', 'min_path': 8}
-{'city1': 'chic', 'city2': 'sant', 'min_path': 9}
-{'city1': 'mont', 'city2': 'atla', 'min_path': 9}
-{'city1': 'saul', 'city2': 'okla', 'min_path': 9}
-{'city1': 'seat', 'city2': 'losa', 'min_path': 9}
-{'city1': 'toro', 'city2': 'miam', 'min_path': 10}
-{'city1': 'dulu', 'city2': 'elpa', 'min_path': 10}
-{'city1': 'denv', 'city2': 'pitt', 'min_path': 11}
-{'city1': 'port', 'city2': 'phoe', 'min_path': 11}
-{'city1': 'dall', 'city2': 'newy', 'min_path': 11}
-{'city1': 'winn', 'city2': 'hous', 'min_path': 11}
-{'city1': 'bost', 'city2': 'miam', 'min_path': 12}
-{'city1': 'winn', 'city2': 'hous', 'min_path': 12}
-{'city1': 'vanc', 'city2': 'sant', 'min_path': 13}
-{'city1': 'mont', 'city2': 'newo', 'min_path': 13}
-{'city1': 'calg', 'city2': 'phoe', 'min_path': 13}
-{'city1': 'losa', 'city2': 'chic', 'min_path': 16}
-{'city1': 'sanf', 'city2': 'atla', 'min_path': 17}
-{'city1': 'port', 'city2': 'nash', 'min_path': 17}
-{'city1': 'vanc', 'city2': 'mont', 'min_path': 20}
-{'city1': 'losa', 'city2': 'miam', 'min_path': 20}
-{'city1': 'losa', 'city2': 'newy', 'min_path': 21}
-{'city1': 'seat', 'city2': 'newy', 'min_path': 22}
+{'city1': 'denv', 'city2': 'elpa', 'min_path': 4, 'number': '01'}
+{'city1': 'kans', 'city2': 'hous', 'min_path': 5, 'number': '02'}
+{'city1': 'newy', 'city2': 'atla', 'min_path': 6, 'number': '03'}
+{'city1': 'calg', 'city2': 'salt', 'min_path': 7, 'number': '04'}
+{'city1': 'chic', 'city2': 'newo', 'min_path': 7, 'number': '05'}
+{'city1': 'dulu', 'city2': 'hous', 'min_path': 8, 'number': '06'}
+{'city1': 'hele', 'city2': 'losa', 'min_path': 8, 'number': '07'}
+{'city1': 'saul', 'city2': 'nash', 'min_path': 8, 'number': '08'}
+{'city1': 'chic', 'city2': 'sant', 'min_path': 9, 'number': '09'}
+{'city1': 'mont', 'city2': 'atla', 'min_path': 9, 'number': '10'}
+{'city1': 'saul', 'city2': 'okla', 'min_path': 9, 'number': '11'}
+{'city1': 'seat', 'city2': 'losa', 'min_path': 9, 'number': '12'}
+{'city1': 'toro', 'city2': 'miam', 'min_path': 10, 'number': '13'}
+{'city1': 'dulu', 'city2': 'elpa', 'min_path': 10, 'number': '14'}
+{'city1': 'denv', 'city2': 'pitt', 'min_path': 11, 'number': '15'}
+{'city1': 'port', 'city2': 'phoe', 'min_path': 11, 'number': '16'}
+{'city1': 'dall', 'city2': 'newy', 'min_path': 11, 'number': '17'}
+{'city1': 'winn', 'city2': 'litt', 'min_path': 11, 'number': '18'}
+{'city1': 'bost', 'city2': 'miam', 'min_path': 12, 'number': '19'}
+{'city1': 'winn', 'city2': 'hous', 'min_path': 12, 'number': '20'}
+{'city1': 'vanc', 'city2': 'sant', 'min_path': 13, 'number': '21'}
+{'city1': 'mont', 'city2': 'newo', 'min_path': 13, 'number': '22'}
+{'city1': 'calg', 'city2': 'phoe', 'min_path': 13, 'number': '23'}
+{'city1': 'losa', 'city2': 'chic', 'min_path': 16, 'number': '24'}
+{'city1': 'sanf', 'city2': 'atla', 'min_path': 17, 'number': '25'}
+{'city1': 'port', 'city2': 'nash', 'min_path': 17, 'number': '26'}
+{'city1': 'vanc', 'city2': 'mont', 'min_path': 20, 'number': '27'}
+{'city1': 'losa', 'city2': 'miam', 'min_path': 20, 'number': '28'}
+{'city1': 'losa', 'city2': 'newy', 'min_path': 21, 'number': '29'}
+{'city1': 'seat', 'city2': 'newy', 'min_path': 22, 'number': '30'}
