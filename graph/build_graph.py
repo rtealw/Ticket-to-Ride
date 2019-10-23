@@ -208,7 +208,7 @@ def min_path(pair):
 pairs.sort(key=min_path)
 for i in range(len(pairs)):
     pair = pairs[i]
-    pair['number'] = str(i + 1).zfill(2)
+    pair['number'] = i + 1
 
 edge_lengths.to_csv('edge_lengths.csv')
 is_double.to_csv('is_double.csv')
