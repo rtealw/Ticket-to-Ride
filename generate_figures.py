@@ -36,4 +36,4 @@ def generate_figure(pairs):
     )
     for item in legend.legendHandles:
         item.set_visible(False)
-    plt.savefig("paper/figures/resistance.svg")
+    plt.savefig("paper/figures/resistance.pdf")
