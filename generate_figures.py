@@ -2,6 +2,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 plt.rcParams['figure.figsize'] = 10, 5.8
 
+LONG_CITIES = ['ATLANTA', 'BOSTON', 'CALGARY', 'CHARLESTON', 'CHICAGO', 'DALLAS', 'DENVER', 'DULUTH', 'EL PASO', 'HELENA', 'HOUSTON', 'KANSAS CITY', 'LAS VEGAS', 'LITTLE ROCK', 'LOS ANGELES', 'MIAMI', 'MONTREAL', 'NASHVILLE', 'NEW ORLEANS', 'NEW YORK', 'OKLAHOMA CITY', 'OMAHA', 'PHOENIX', 'PITTSBURGH', 'PORTLAND', 'RALEIGH', 'SAINT LOUIS', 'SALT LAKE CITY', 'SAN FRANCISCO', 'SANTA FE', 'SAULT ST. MARIE', 'SEATTLE', 'TORONTO', 'VANCOUVER', 'WASHINGTON', 'WINNIPEG']
+SHORT_CITIES = [city.replace(" ", "")[:4] for city in LONG_CITIES]
+
+def lengthenCity(shortened_name):
+    long_city = LONG_CITIES[SHORT_CITIES.index(shortened_name.upper())]
+    result = ""
+    for word in long_city.split(" "):
+        result += word.capitalize() + " "
+    print(result)
+    return result[:-1]
+
 def generate_figure(pairs):
     xs, ys = [], []
     ax = plt.subplot()
@@ -9,7 +20,7 @@ def generate_figure(pairs):
         x, y, number = pair['resistance'], pair['min_path'], pair['number']
         xs.append(x)
         ys.append(y)
-        label = '{} {}/{}'.format(number, pair['city1'], pair['city2']).upper()
+        label = '{} {}/{}'.format(number, lengthenCity(pair['city1']), lengthenCity(pair['city2']))
         ax.scatter(x,y, s=2, label=label)
         ax.annotate(number, (x,y), ha='center', va='center', fontsize=8,
                            bbox=dict(boxstyle="circle,pad=0.3", fc="white"))
