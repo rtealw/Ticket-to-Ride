@@ -5,28 +5,48 @@ plt.rcParams['figure.figsize'] = 10, 5.8
 LONG_CITIES = ['ATLANTA', 'BOSTON', 'CALGARY', 'CHARLESTON', 'CHICAGO', 'DALLAS', 'DENVER', 'DULUTH', 'EL PASO', 'HELENA', 'HOUSTON', 'KANSAS CITY', 'LAS VEGAS', 'LITTLE ROCK', 'LOS ANGELES', 'MIAMI', 'MONTREAL', 'NASHVILLE', 'NEW ORLEANS', 'NEW YORK', 'OKLAHOMA CITY', 'OMAHA', 'PHOENIX', 'PITTSBURGH', 'PORTLAND', 'RALEIGH', 'SAINT LOUIS', 'SALT LAKE CITY', 'SAN FRANCISCO', 'SANTA FE', 'SAULT ST. MARIE', 'SEATTLE', 'TORONTO', 'VANCOUVER', 'WASHINGTON', 'WINNIPEG']
 SHORT_CITIES = [city.replace(" ", "")[:4] for city in LONG_CITIES]
 
-def lengthenCity(shortened_name):
-    long_city = LONG_CITIES[SHORT_CITIES.index(shortened_name.upper())]
-    result = ""
-    for word in long_city.split(" "):
-        result += word.capitalize() + " "
-    print(result)
-    return result[:-1]
+def lengthenEdge(city1, city2):
+    new_edge = ""
+    for city in sorted([city1, city2]):
+        long_city = LONG_CITIES[SHORT_CITIES.index(city.upper())]
+        new_city = ""
+        for word in long_city.split(" "):
+            new_city += word.capitalize() + " "
+        new_edge += new_city[:-1] + "/"
+    return new_edge[:-1]
+
+
+def getProportions(filename):
+    text_file = open(filename, 'r')
+    keys = eval(text_file.readline())
+    props = eval(text_file.readline())
+    text_file.close()
+    return keys, props
+
+def getColor(cmap, edge, keys, props):
+    current_prop = props[keys.index(edge.upper())]
+    standardized_prop = (current_prop - min(props)) / (max(props) - min(props))
+    return cmap(standardized_prop)
 
 def generate_figure(pairs):
-    xs, ys = [], []
-    ax = plt.subplot()
+    xs, ys, props = [], [], []
+    fig, ax = plt.subplots()
+    cmap = plt.cm.get_cmap('RdYlGn')
+    keys, props = getProportions("ticket_wins.txt")
     for pair in pairs:
         x, y, number = pair['resistance'], pair['min_path'], pair['number']
         xs.append(x)
         ys.append(y)
-        label = '{} {}/{}'.format(number, lengthenCity(pair['city1']), lengthenCity(pair['city2']))
-        ax.scatter(x,y, s=2, label=label)
+        edge = lengthenEdge(pair['city1'], pair['city2'])
+        label = "{} {}".format(number, edge)
+        color = getColor(cmap=cmap, edge=edge, keys=keys, props=props)
         ax.annotate(number, (x,y), ha='center', va='center', fontsize=8,
-                           bbox=dict(boxstyle="circle,pad=0.3", fc="white"))
+                           bbox=dict(boxstyle="circle,pad=0.3", fc=color))
+        ax.scatter(x,y, s=2, label=label)
 
     interval = np.linspace(min(xs), max(xs), 100)
     best_fit_func = np.poly1d(np.polyfit(xs, ys, deg=1))
+
     plt.plot(interval, best_fit_func(interval), color="black")
 
     # Shrink current axis
@@ -36,15 +56,23 @@ def generate_figure(pairs):
     plt.xlim(min(xs) * .5, max(xs) * 1.1)
     plt.ylim(min(ys) * .5, max(ys) * 1.1)
     plt.yticks(range(min(ys), max(ys)+1, 2)) # integer y axis
-    plt.title("Destination Tickets by Reward and Difficulty")
+    plt.title("Destination Tickets\n(Colored by Proportion of Wins in Two Player Games)")
     plt.xlabel("Effective Resistance")
     plt.ylabel("Length of Minimum Path")
     legend = ax.legend(
-        bbox_to_anchor = (1, 1),
+        bbox_to_anchor = (1.08, 1.01),
         handlelength = 0, 
         handletextpad=0,
-        fontsize=7
+        fontsize=7.4
     )
     for item in legend.legendHandles:
         item.set_visible(False)
+
+    cbaxes = fig.add_axes([box.width+.008, box.y0, 0.01, box.height])
+    cbar = fig.colorbar(plt.cm.ScalarMappable(cmap=cmap), ax=ax, cax=cbaxes)
+    cbar_labels = [min(props) + x * (max(props) - min(props))/5 for x in range(6)]
+    cbar.ax.set_yticklabels([str(round(label, 2))[1:] for label in cbar_labels])
+    cbar.ax.yaxis.set_ticks_position('left')
+    cbar.ax.set_label("Proportion of Wins")
+ 
     plt.savefig("paper/figures/resistance.eps")
