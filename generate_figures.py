@@ -28,11 +28,11 @@ def getColor(cmap, edge, keys, props):
     standardized_prop = (current_prop - min(props)) / (max(props) - min(props))
     return cmap(standardized_prop)
 
-def generate_figure(pairs):
+def generate_figure(pairs, num_players):
     xs, ys, props = [], [], []
     fig, ax = plt.subplots()
     cmap = plt.cm.get_cmap('RdYlGn')
-    keys, props = getProportions("ticket_wins.txt")
+    keys, props = getProportions("tickets_{}.txt".format(num_players))
     for pair in pairs:
         x, y, number = pair['resistance'], pair['min_path'], pair['number']
         xs.append(x)
@@ -56,7 +56,9 @@ def generate_figure(pairs):
     plt.xlim(min(xs) * .5, max(xs) * 1.1)
     plt.ylim(min(ys) * .5, max(ys) * 1.1)
     plt.yticks(range(min(ys), max(ys)+1, 2)) # integer y axis
-    plt.title("Destination Tickets by Reward vs. Difficulty\nColored by Proportion of Wins in Two Player Games")
+    title = "Destination Tickets by Reward vs. Difficulty"
+    subtitle = "Colored by Proportion of {} Player Wins".format(num_players.capitalize())
+    plt.title("{}\n{}".format(title, subtitle))
     plt.xlabel("Effective Resistance")
     plt.ylabel("Length of Minimum Path")
     legend = ax.legend(
@@ -75,4 +77,4 @@ def generate_figure(pairs):
     cbar.ax.yaxis.set_ticks_position('left')
     cbar.ax.set_label("Proportion of Wins")
  
-    plt.savefig("paper/figures/resistance.eps")
+    plt.savefig("paper/figures/resistance_{}.eps".format(num_players))

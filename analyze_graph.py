@@ -43,4 +43,5 @@ def find_probability_pair():
 ## A player will not use locomotives to buy routes
 
 pairs = find_resistance_between_pairs()
-generate_figure(pairs)
+generate_figure(pairs=pairs, num_players="two")
+generate_figure(pairs=pairs, num_players="four")
