@@ -56,11 +56,11 @@ def generate_figure(pairs):
     plt.xlim(min(xs) * .5, max(xs) * 1.1)
     plt.ylim(min(ys) * .5, max(ys) * 1.1)
     plt.yticks(range(min(ys), max(ys)+1, 2)) # integer y axis
-    plt.title("Destination Tickets\n(Colored by Proportion of Wins in Two Player Games)")
+    plt.title("Destination Tickets by Reward vs. Difficulty\nColored by Proportion of Wins in Two Player Games")
     plt.xlabel("Effective Resistance")
     plt.ylabel("Length of Minimum Path")
     legend = ax.legend(
-        bbox_to_anchor = (1.08, 1.01),
+        bbox_to_anchor = (1, 1.01),
         handlelength = 0, 
         handletextpad=0,
         fontsize=7.4
@@ -68,7 +68,7 @@ def generate_figure(pairs):
     for item in legend.legendHandles:
         item.set_visible(False)
 
-    cbaxes = fig.add_axes([box.width+.008, box.y0, 0.01, box.height])
+    cbaxes = fig.add_axes([.05, box.y0, 0.01, box.height])
     cbar = fig.colorbar(plt.cm.ScalarMappable(cmap=cmap), ax=ax, cax=cbaxes)
     cbar_labels = [min(props) + x * (max(props) - min(props))/5 for x in range(6)]
     cbar.ax.set_yticklabels([str(round(label, 2))[1:] for label in cbar_labels])
