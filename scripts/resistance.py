@@ -45,9 +45,10 @@ def find_resistance(array, vertex_i, vertex_j):
   ellens_res = ellens_resistance(laplacian, vertex_i, vertex_j)
   wu_res = wu_resistance(laplacian, vertex_i, vertex_j)
   if ellens_res != wu_res:
-    print("Resistances are not equal: ")
-    print(ellens_res)
-    print(wu_res)
+    print()
+    print("Ellen resistance: {}".format(ellens_res))
+    print("Wu resistance: {}".format(wu_res))
+    raise "Resistances are not equal!"
   return ellens_res
 
 if __name__ == '__main__':
