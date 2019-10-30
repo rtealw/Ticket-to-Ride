@@ -5,6 +5,7 @@ from resistance import find_resistance
 from generate_figures import generate_figure
 from scipy.special import comb as choose
 import matplotlib.pyplot as plt
+import networkx as nx
 
 def generate_resistance_graph(path="../graph/"):
     edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
@@ -12,6 +13,27 @@ def generate_resistance_graph(path="../graph/"):
     is_wild = pd.read_csv('{}is_wild.csv'.format(path), index_col=0)
     resistance_graph = np.array(edge_lengths)
     return resistance_graph
+
+def generate_networkx_graph(path="../graph/"):
+    edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
+    is_double = pd.read_csv('{}is_double.csv'.format(path), index_col=0)
+    G = nx.MultiGraph()
+    cities = list(edge_lengths)
+    for i in range(len(edge_lengths)):
+        city1 = cities[i]
+        for j in range(i+1, len(edge_lengths)):
+            city2 = cities[j]
+            weight = edge_lengths[city1][city2]
+            if weight > 0:
+                G.add_edge(i, j, weight=weight)
+                if is_double[city1][city2]:
+                    G.add_edge(i, j, weight=weight)
+    node_labels = {i : cities[i] for i in range(len(cities))}
+    pos=nx.get_node_attributes(G,'pos')
+    edge_labels = nx.get_edge_attributes(G,'weight')
+    nx.draw(G, labels=node_labels)
+    #nx.draw_networkx_edge_labels(G,pos=nx.spring_layout(G), edge_labels=edge_labels)
+    plt.show()
 
 def find_resistance_between_pairs(path="../graph/"):
     resistance_graph = generate_resistance_graph()
@@ -42,6 +64,8 @@ def find_probability_pair():
 ## The ratio of colors is independent between turns
 ## A player will not use locomotives to buy routes
 
-pairs = find_resistance_between_pairs()
-generate_figure(pairs=pairs, num_players="two")
-generate_figure(pairs=pairs, num_players="four")
+#pairs = find_resistance_between_pairs()
+#generate_figure(pairs=pairs, num_players="two")
+#generate_figure(pairs=pairs, num_players="four")
+
+generate_networkx_graph()
