@@ -32,7 +32,7 @@ def generate_figure(pairs, num_players):
     xs, ys, props = [], [], []
     fig, ax = plt.subplots()
     cmap = plt.cm.get_cmap('RdYlGn')
-    keys, props = getProportions("tickets_{}.txt".format(num_players))
+    keys, props = getProportions("input/tickets_{}.txt".format(num_players))
     for pair in pairs:
         x, y, number = pair['resistance'], pair['min_path'], pair['number']
         xs.append(x)
@@ -77,4 +77,4 @@ def generate_figure(pairs, num_players):
     cbar.ax.yaxis.set_ticks_position('left')
     cbar.ax.set_label("Proportion of Wins")
  
-    plt.savefig("paper/figures/resistance_{}.eps".format(num_players))
+    plt.savefig("../paper/figures/resistance_{}.eps".format(num_players))

@@ -6,17 +6,17 @@ from generate_figures import generate_figure
 from scipy.special import comb as choose
 import matplotlib.pyplot as plt
 
-def generate_resistance_graph():
-    edge_lengths = pd.read_csv('graph/edge_lengths.csv', index_col=0)
-    is_double = pd.read_csv('graph/is_double.csv', index_col=0)
-    is_wild = pd.read_csv('graph/is_wild.csv', index_col=0)
+def generate_resistance_graph(path="../graph/"):
+    edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
+    is_double = pd.read_csv('{}is_double.csv'.format(path), index_col=0)
+    is_wild = pd.read_csv('{}is_wild.csv'.format(path), index_col=0)
     resistance_graph = np.array(edge_lengths)
     return resistance_graph
 
-def find_resistance_between_pairs():
+def find_resistance_between_pairs(path="../graph/"):
     resistance_graph = generate_resistance_graph()
-    cities = list(np.genfromtxt('graph/cities.csv', dtype=str))
-    pairs = [eval(",".join(line)) for line in csv.reader(open('graph/pairs.csv'))]
+    cities = list(np.genfromtxt('{}cities.csv'.format(path), dtype=str))
+    pairs = [eval(",".join(line)) for line in csv.reader(open('{}pairs.csv'.format(path)))]
 
     for pair in pairs:
         index1 = cities.index(pair["city1"])
