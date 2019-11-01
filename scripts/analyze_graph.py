@@ -28,15 +28,10 @@ def generate_networkx_graph(path="../graph/"):
                 G.add_edge(i, j, weight=weight)
                 if is_double[city1][city2]:
                     G.add_edge(i, j, weight=weight)
-    node_labels = {i : cities[i] for i in range(len(cities))}
-    pos=nx.get_node_attributes(G,'pos')
-    edge_labels = nx.get_edge_attributes(G,'weight')
-    nx.draw(G, labels=node_labels)
-    #nx.draw_networkx_edge_labels(G,pos=nx.spring_layout(G), edge_labels=edge_labels)
-    plt.show()
+    return G
 
 def find_resistance_between_pairs(path="../graph/"):
-    resistance_graph = generate_resistance_graph()
+    resistance_graph = generate_resistance_graph() 
     cities = list(np.genfromtxt('{}cities.csv'.format(path), dtype=str))
     pairs = [eval(",".join(line)) for line in csv.reader(open('{}pairs.csv'.format(path)))]
 
@@ -46,6 +41,68 @@ def find_resistance_between_pairs(path="../graph/"):
         pair_resistance = find_resistance(resistance_graph, index1, index2)
         pair["resistance"] = pair_resistance
     return pairs
+
+def hash_edge(node1, node2):
+    return tuple(sorted([node1, node2]))
+#    return "/".join(str(node) for node in sorted([node1, node2]))
+
+def get_st_num_edge(paths, multiplicities):
+    st_num_edge = {}
+    for path_index in range(len(paths)):
+        path = paths[path_index]
+        for start_index in range(len(path)-1):
+            node1 = path[start_index]
+            node2 = path[start_index+1]
+            edge = hash_edge(node1, node2)
+            if edge not in st_num_edge:
+                st_num_edge[edge] = 0
+            st_num_edge[edge] += multiplicities[path_index]
+    return st_num_edge
+
+def get_multiplicities(paths, count_double = True, filepath = '../graph/'):
+    is_double = pd.read_csv('{}is_double.csv'.format(filepath), index_col=0)
+    cities = list(is_double)
+    multiplicities = [1] * len(paths)
+    for path_index in range(len(paths)):
+        path = paths[path_index]
+        for start_index in range(len(path)-1):
+            node1 = path[start_index]
+            node2 = path[start_index+1]
+            if is_double[cities[node1]][cities[node2]] and count_double:
+                multiplicities[path_index] *= 2
+    return multiplicities
+
+def find_betweenness(weight="weight", count_double=True):
+    G = generate_networkx_graph()
+#    
+#    print(networkx_betweenness)
+    betweenness = {}
+    for s in range(len(G)):
+        for t in range(s+1, len(G)):
+            paths = list(nx.all_shortest_paths(G, source=s, target=t, weight=weight))
+            multiplicities = get_multiplicities(paths, count_double=count_double)
+            st_num = sum(multiplicities)
+            st_num_edge = get_st_num_edge(paths, multiplicities)
+            for edge in st_num_edge.keys():
+                if edge not in betweenness:
+                    betweenness[edge] = 0
+                betweenness[edge] += float(st_num_edge[edge])/st_num
+    # normalize
+    for edge in betweenness.keys():
+        betweenness[edge] *= float(2)/(len(G) * (len(G) - 1))
+    return betweenness
+
+def test_betweenness(tolerance=1e-5):
+    G = generate_networkx_graph()
+    networkx_betweenness = nx.algorithms.centrality.edge_betweenness_centrality(G=G, normalized=True, weight="weight")
+    simple_betweenness = find_betweenness(weight="random", count_double=False)
+    for edge in networkx_betweenness.keys():
+        if np.absolute(networkx_betweenness[edge] - simple_betweenness[edge]) > tolerance:
+            print("Edge:", edge)
+            print("Networkx:", networkx_betweenness[edge])
+            print("Simple:", simple_betweenness[edge])
+            raise "Networkx and simple betweenness are not the same"
+
 
 def find_probability_pair():
     ways_no_pair = 0
@@ -68,4 +125,6 @@ def find_probability_pair():
 #generate_figure(pairs=pairs, num_players="two")
 #generate_figure(pairs=pairs, num_players="four")
 
-generate_networkx_graph()
+#test_betweenness()
+betweenness = find_betweenness()
+print(betweenness)
