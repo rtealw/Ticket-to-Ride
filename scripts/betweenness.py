@@ -1,6 +1,7 @@
 import pandas as pd
 import networkx as nx
 import numpy as np
+from termcolor import cprint
 
 def generate_networkx_graph(path="../graph/"):
     edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
@@ -50,6 +51,7 @@ def get_multiplicities(paths, count_double = True, filepath = '../graph/'):
 def find_betweenness(weight="weight", count_double=True):
     G = generate_networkx_graph()
     betweenness = {}
+    edges = []
     for s in range(len(G)):
         for t in range(s+1, len(G)):
             paths = list(nx.all_shortest_paths(G, source=s, target=t, weight=weight))
@@ -60,43 +62,51 @@ def find_betweenness(weight="weight", count_double=True):
                 if edge not in betweenness:
                     betweenness[edge] = 0
                 betweenness[edge] += float(st_num_edge[edge])/st_num
+            edges.append((s,t))
     # Normalize
-    for edge in betweenness.keys():
-        betweenness[edge] *= float(2)/(len(G) * (len(G) - 1))
+    for edge in edges:
+        if edge not in betweenness:
+            betweenness[edge] = 0
+        else:
+            betweenness[edge] *= float(2)/(len(G) * (len(G) - 1))
     return betweenness
 
 def test_find_betweenness(tolerance=1e-5):
+    print("Testing unweighted, single-edge betweenness...")
     G = generate_networkx_graph()
     networkx_betweenness = nx.algorithms.centrality.edge_betweenness_centrality(G=G, normalized=True, weight="weight")
     simple_betweenness = find_betweenness(weight="random", count_double=False)
     for edge in networkx_betweenness.keys():
         hashed_edge = hash_edge(edge[0], edge[1])
         if np.absolute(networkx_betweenness[edge] - simple_betweenness[hashed_edge]) > tolerance:
+            cprint("Failed :(", "red")
             print("Edge:", edge)
-            print("Networkx:", networkx_betweenness[edge])
-            print("Simple:", simple_betweenness[edge])
-            raise "Networkx and simple betweenness are not the same"
+            print("Networkx: ", end= " ")
+            cprint(networkx_betweenness[edge], "red")
+            print("Simple: ", end=" ")
+            cprint(simple_betweenness[edge], "red")
+            return
+    cprint("Passed :)", "green")
 
 def orderXbyY(X, Y):
     ordered_X = [x for _, x in sorted(zip(Y,X), key = lambda pair: pair[0])]
     ordered_X.reverse()
     return ordered_X
 
-betweenness = find_betweenness()
-edges, centrality = [], []
-for edge in betweenness.keys():
-    edges.append(edge)
-    centrality.append(betweenness[edge])
-
-edges = orderXbyY(edges, centrality)
-centrality = orderXbyY(centrality, centrality)
-
-cities = list(pd.read_csv('../graph/is_double.csv', index_col=0))
-for index in range(len(edges)):
-    city_index1, city_index2 = edges[index]
-    print(cities[city_index1], cities[city_index2], centrality[index])
-
+#betweenness = find_betweenness()
+#edges, centrality = [], []
+#for edge in betweenness.keys():
+#    edges.append(edge)
+#    centrality.append(betweenness[edge])
+#
+#edges = orderXbyY(edges, centrality)
+#centrality = orderXbyY(centrality, centrality)
+#
+#cities = list(pd.read_csv('../graph/is_double.csv', index_col=0))
+#for index in range(len(edges)):
+#    city_index1, city_index2 = edges[index]
+#    print(cities[city_index1], cities[city_index2], centrality[index])
+#
 
 if __name__ == "__main__":
-    #test_find_betweenness()
-    pass
+    test_find_betweenness()

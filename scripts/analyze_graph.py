@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import csv
 from resistance import find_resistance
-from generate_figures import generate_figure
+from resistance_figures import resistance_figure
 from scipy.special import comb as choose
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -44,9 +44,9 @@ def find_probability_pair():
 ## The ratio of colors is independent between turns
 ## A player will not use locomotives to buy routes
 
-#pairs = find_resistance_between_pairs()
-#generate_figure(pairs=pairs, num_players="two")
-#generate_figure(pairs=pairs, num_players="four")
+pairs = find_resistance_between_pairs()
+resistance_figure(pairs=pairs, num_players="two")
+resistance_figure(pairs=pairs, num_players="four")
 
-betweenness = find_betweenness()
-print(betweenness)
+#betweenness = find_betweenness()
+#print(betweenness)

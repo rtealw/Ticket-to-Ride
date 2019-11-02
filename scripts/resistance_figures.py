@@ -5,7 +5,7 @@ plt.rcParams['figure.figsize'] = 10, 5.8
 LONG_CITIES = ['ATLANTA', 'BOSTON', 'CALGARY', 'CHARLESTON', 'CHICAGO', 'DALLAS', 'DENVER', 'DULUTH', 'EL PASO', 'HELENA', 'HOUSTON', 'KANSAS CITY', 'LAS VEGAS', 'LITTLE ROCK', 'LOS ANGELES', 'MIAMI', 'MONTREAL', 'NASHVILLE', 'NEW ORLEANS', 'NEW YORK', 'OKLAHOMA CITY', 'OMAHA', 'PHOENIX', 'PITTSBURGH', 'PORTLAND', 'RALEIGH', 'SAINT LOUIS', 'SALT LAKE CITY', 'SAN FRANCISCO', 'SANTA FE', 'SAULT ST. MARIE', 'SEATTLE', 'TORONTO', 'VANCOUVER', 'WASHINGTON', 'WINNIPEG']
 SHORT_CITIES = [city.replace(" ", "")[:4] for city in LONG_CITIES]
 
-def lengthenEdge(city1, city2):
+def lengthen_edge(city1, city2):
     new_edge = ""
     for city in sorted([city1, city2]):
         long_city = LONG_CITIES[SHORT_CITIES.index(city.upper())]
@@ -15,30 +15,30 @@ def lengthenEdge(city1, city2):
         new_edge += new_city[:-1] + "/"
     return new_edge[:-1]
 
-def getProportions(filename):
+def get_proportions(filename):
     text_file = open(filename, 'r')
     keys = eval(text_file.readline())
     props = eval(text_file.readline())
     text_file.close()
     return keys, props
 
-def getColor(cmap, edge, keys, props):
+def get_color(cmap, edge, keys, props):
     current_prop = props[keys.index(edge.upper())]
     standardized_prop = (current_prop - min(props)) / (max(props) - min(props))
     return cmap(standardized_prop)
 
-def generate_figure(pairs, num_players):
+def resistance_figure(pairs, num_players):
     xs, ys, props = [], [], []
     fig, ax = plt.subplots()
     cmap = plt.cm.get_cmap('RdYlGn')
-    keys, props = getProportions("input/tickets_{}.txt".format(num_players))
+    keys, props = get_proportions("input/tickets_{}.txt".format(num_players))
     for pair in pairs:
         x, y, number = pair['resistance'], pair['min_path'], pair['number']
         xs.append(x)
         ys.append(y)
-        edge = lengthenEdge(pair['city1'], pair['city2'])
+        edge = lengthen_edge(pair['city1'], pair['city2'])
         label = "{} {}".format(number, edge)
-        color = getColor(cmap=cmap, edge=edge, keys=keys, props=props)
+        color = get_color(cmap=cmap, edge=edge, keys=keys, props=props)
         ax.annotate(number, (x,y), ha='center', va='center', fontsize=8,
                            bbox=dict(boxstyle="circle,pad=0.3", fc=color))
         ax.scatter(x,y, s=2, label=label)
