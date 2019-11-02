@@ -93,20 +93,5 @@ def orderXbyY(X, Y):
     ordered_X.reverse()
     return ordered_X
 
-#betweenness = find_betweenness()
-#edges, centrality = [], []
-#for edge in betweenness.keys():
-#    edges.append(edge)
-#    centrality.append(betweenness[edge])
-#
-#edges = orderXbyY(edges, centrality)
-#centrality = orderXbyY(centrality, centrality)
-#
-#cities = list(pd.read_csv('../graph/is_double.csv', index_col=0))
-#for index in range(len(edges)):
-#    city_index1, city_index2 = edges[index]
-#    print(cities[city_index1], cities[city_index2], centrality[index])
-#
-
 if __name__ == "__main__":
     test_find_betweenness()

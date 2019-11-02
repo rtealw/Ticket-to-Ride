@@ -25,12 +25,17 @@ def get_list(keys, betweenness):
         route_betweenness.append(betweenness[key_betweenness])
     return route_betweenness
 
-def betweenness_figure(num_players):
+def betweenness_figure():
     betweenness = find_betweenness(weight="weights", count_double=False)
-    keys, route_props = get_proportions("input/routes_{}.txt".format(num_players))
+    keys, route_two = get_proportions("input/routes_two.txt")
+    keys, route_four = get_proportions("input/routes_four.txt")
     route_betweenness = get_list(keys=keys, betweenness=betweenness)
-    plt.scatter(x=route_props, y=route_betweenness)
-    plt.show()
 
+    plt.scatter(x=route_two, y=route_betweenness, marker="h", s=2**6, color="brown", label="Two")
+    plt.scatter(x=route_four, y=route_betweenness, marker="H", s=2**6, color="teal", label="Four")
+    plt.title("Claims per Game vs. Betweenness Centrality")
+    plt.xlabel("Claims per Game")
+    plt.ylabel("Betweenness Centrality")
+    plt.legend(title="Players")
 
-betweenness_figure(num_players="two")
+    plt.savefig("../paper/figures/betweenness.eps")
