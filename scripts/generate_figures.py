@@ -15,7 +15,6 @@ def lengthenEdge(city1, city2):
         new_edge += new_city[:-1] + "/"
     return new_edge[:-1]
 
-
 def getProportions(filename):
     text_file = open(filename, 'r')
     keys = eval(text_file.readline())
