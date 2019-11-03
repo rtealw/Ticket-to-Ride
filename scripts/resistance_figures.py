@@ -77,3 +77,4 @@ def resistance_figure(pairs, num_players):
     cbar.ax.set_label("Proportion of Wins")
  
     plt.savefig("../paper/figures/resistance_{}.eps".format(num_players))
+    plt.close()

@@ -71,10 +71,14 @@ def find_betweenness(weight="weight", count_double=True):
             betweenness[edge] *= float(2)/(len(G) * (len(G) - 1))
     return betweenness
 
+def find_current_flow():
+    G = generate_networkx_graph()
+    return nx.edge_current_flow_betweenness_centrality(G=G, weight="weight")
+
 def test_find_betweenness(tolerance=1e-5):
     print("Testing unweighted, single-edge betweenness...")
     G = generate_networkx_graph()
-    networkx_betweenness = nx.algorithms.centrality.edge_betweenness_centrality(G=G, normalized=True, weight="weight")
+    networkx_betweenness = nx.edge_betweenness_centrality(G=G, normalized=True, weight="weight")
     simple_betweenness = find_betweenness(weight="random", count_double=False)
     for edge in networkx_betweenness.keys():
         hashed_edge = hash_edge(edge[0], edge[1])
@@ -87,11 +91,6 @@ def test_find_betweenness(tolerance=1e-5):
             cprint(simple_betweenness[edge], "red")
             return
     cprint("Passed :)", "green")
-
-def orderXbyY(X, Y):
-    ordered_X = [x for _, x in sorted(zip(Y,X), key = lambda pair: pair[0])]
-    ordered_X.reverse()
-    return ordered_X
 
 if __name__ == "__main__":
     test_find_betweenness()
