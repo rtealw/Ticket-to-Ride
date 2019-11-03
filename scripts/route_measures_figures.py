@@ -44,7 +44,8 @@ def measure_figure(measure, xlabel, filename):
     plt.savefig("../paper/figures/centrality_{}.eps".format(filename))
     plt.close()
 
-betweenness = find_betweenness()
-current_flow = find_current_flow()
-measure_figure(measure=betweenness, xlabel="Betweenness Centrality", filename="betweenness")
-measure_figure(measure=current_flow, xlabel="Current Flow Centrality", filename="current_flow")
+def all_measures():
+    betweenness = find_betweenness()
+    current_flow = find_current_flow()
+    measure_figure(measure=betweenness, xlabel="Betweenness Centrality", filename="betweenness")
+    measure_figure(measure=current_flow, xlabel="Current Flow Centrality", filename="current_flow")

@@ -6,7 +6,7 @@ from resistance_figures import resistance_figure
 from scipy.special import comb as choose
 import matplotlib.pyplot as plt
 import networkx as nx
-from betweenness_figures import betweenness_figure
+from route_measures_figures import all_measures
 
 def generate_resistance_graph(path="../graph/"):
     edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
@@ -44,7 +44,7 @@ def find_probability_pair():
 ## The ratio of colors is independent between turns
 ## A player will not use locomotives to buy routes
 
-betweenness_figure()
+all_measures()
 
 pairs = find_resistance_between_pairs()
 resistance_figure(pairs=pairs, num_players="two")
