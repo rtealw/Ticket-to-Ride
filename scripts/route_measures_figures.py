@@ -2,6 +2,7 @@ from route_measures import find_betweenness, find_current_flow
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+import scipy.stats
 plt.rcParams['figure.figsize'] = 10, 5.8
 
 def get_proportions(filename):
@@ -34,6 +35,12 @@ def measure_figure(measure, xlabel, filename):
     keys, route_four = get_proportions("input/routes_four.txt")
     route_measure = get_list(keys=keys, measure = measure)
 
+    print(filename)
+    print("routes in two player games")
+    print(scipy.stats.pearsonr(route_two, route_measure))
+    print("routes in four player games")
+    print(scipy.stats.pearsonr(route_four, route_measure))
+
     plt.scatter(x=route_measure, y=route_two, marker="h", s=2**6, color="brown", label="Two")
     plt.scatter(x=route_measure, y=route_four, marker="H", s=2**6, color="teal", label="Four")
     plt.title("Edges")
@@ -49,3 +56,5 @@ def all_measures():
     current_flow = find_current_flow()
     measure_figure(measure=betweenness, xlabel="Betweenness Centrality", filename="betweenness")
     measure_figure(measure=current_flow, xlabel="Current Flow Centrality", filename="current_flow")
+
+#all_measures()
