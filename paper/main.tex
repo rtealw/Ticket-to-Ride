@@ -1,4 +1,4 @@
-\documentclass[twocolumn]{article}
+\documentclass{article}
 \usepackage{amsmath}
 \usepackage{fancyhdr}
 \usepackage{amssymb}
@@ -16,7 +16,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{thm-restate}
 \usepackage{enumitem}
-
+\usepackage{multicol}
+\usepackage{float}
 
 
 \usepackage{mathrsfs}
@@ -113,12 +114,14 @@
 \maketitle
 %-Title
 
+\begin{multicols}{2}
 \input{sections/1_introduction.tex}
 \input{sections/2_routes.tex}
 \input{sections/3_resistance.tex}
 \input{sections/4_centrality.tex}
-
+ 
 \bibliographystyle{abbrv}
 \bibliography{main}
 
+\end{multicols}{2}
 \end{document}
