@@ -41,8 +41,8 @@ def measure_figure(measure, xlabel, filename):
     print("routes in four player games")
     print(scipy.stats.pearsonr(route_four, route_measure))
 
-    plt.scatter(x=route_measure, y=route_two, marker="h", s=2**6, color="brown", label="Two")
-    plt.scatter(x=route_measure, y=route_four, marker="H", s=2**6, color="teal", label="Four")
+    plt.scatter(x=route_measure, y=route_two, s=2**6, color="gold", label="Two")
+    plt.scatter(x=route_measure, y=route_four, s=2**6, color="black", label="Four")
     plt.title("Edges")
     plt.ylabel("Claims per Game")
     plt.xlabel(xlabel)
