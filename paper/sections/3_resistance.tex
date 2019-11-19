@@ -96,27 +96,69 @@ Destination Ticket in order to gain insight
 into what makes players with some Destination Tickets
 win more often than players with other Destination Tickets.
 
+On a small graph, effective resistance can be calculated
+by repeatedly applying the following rules.
+Consider two edges with resistances $r_1$ and $r_0$.
+If the two edges are in series (edge 1 connects node $i$ to $j$
+and edge 2 connects node $j$ to $k$), then the resistance between
+$i$ and $i$ is $r_1 + r_2$.
+If the two edges are in parallel (both edge 1 and edge 2 connect
+node $i$ to $j$), then the resistance between $i$ and $j$
+is $(1/r_1 + 1/r_2)^{-1}$.
 
-\begin{figure*}[!ht]
-\centering
-\includegraphics[scale=.8]{figures/resistance_four}
-\caption{Destination Tickets by their effective
-resistance and minimum path length.
-The line of best fit gives an approximation of the
-Destination Tickets that are better deals (above the line).
-Note: the $16^{th}$ Destination Ticket Portland/Phoenix is obscured
-by the $18^{th}$.}
-\label{fig:resistance}
-\end{figure*}
+On a large graph like the \textit{Ticket to Ride} board, 
+the process becomes inefficient.
+We instead use two separate algorithms to find the effective resistance
+of Destination Tickets
+\cite{ellens2011effective, wu2004theory}.
+Both algorithms calculate the effective resistance by finding 
+the eigenvalues of the Laplacian matrix for a given graph.
+The Laplacian is the degree matrix $D$ minus the adjacency
+matrix $A$ where $D_{i,i}$ is the weighted degree of node $i$
+and $A_{i,j}$ is the resistance of the edges between nodes
+$i$ and $j$.
 
-\begin{figure*}[!h]
-\centering
-\includegraphics[scale=.8]{figures/resistance_two}
-\caption{Destination Tickets by their effective
-resistance and minimum path length.
-The line of best fit gives an approximation of the
-Destination Tickets that are better deals (above the line).
-Note: the $16^{th}$ Destination Ticket Portland/Phoenix is obscured
-by the $18^{th}$.}
-\label{fig:resistance}
-\end{figure*}
+We let the weight between two cities be the number
+of trains of the route connecting them.
+In the case that there are two routes between cities,
+we let the weight be $(1/r + 1/r)^{-1}=r/2$ where
+$r$ is the number of trains of each route.
+Our results appear in \cref{fig:resistance4}
+and \cref{fig:resistance4}.
+
+\end{multicols}
+\begin{figure}
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \includegraphics[scale=.65]{figures/resistance_four}
+        \caption{Destination Tickets by their effective
+        resistance and minimum path length and colored
+        by the proportion of wins in four-player games.
+        The line of best fit gives an approximation of the
+        Destination Tickets that are better deals (above the line).
+        Note: the $16^{th}$ Destination Ticket Portland/Phoenix is obscured
+        by the $18^{th}$.}
+        \label{fig:resistance4}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}[b]{\textwidth}
+        \includegraphics[scale=.65]{figures/resistance_two}
+        \caption{\cref{fig:resistance4} colored by proportion
+        of wins in two-player rather than four-player games.}
+        \label{fig:resistance2}
+    \end{subfigure}
+\end{figure}
+\begin{multicols}{2}
+
+\end{multicols}
+\begin{table}[]
+\begin{tabular}{|c|l|l|l|l|}
+\hline
+\textbf{}                 & \textbf{Path Length} & \textbf{Two-player Wins} & \textbf{Four-player Wins} & \textbf{Best Fit Distance} \\ \hline
+\textbf{Resistance}       & \textit{4.923e-02}   & \textit{3.667e-01}       & 7.798e-03                 & \textit{1.000e+00}         \\ \hline
+\textbf{Path Length}      &                      & 1.491e-05                & 8.127e-18                 & 7.108e-14                  \\ \hline
+\textbf{Two-player Wins}  &                      &                          & 1.108e-03                 & 2.878e-08                  \\ \hline
+\textbf{Four-player Wins} &                      &                          &                           & 2.730e-09                  \\ \hline
+\end{tabular}
+\end{table}
+\begin{multicols}{2}
