@@ -178,13 +178,3 @@ The Long Route Agent claims longer routes (defined as four trains or more)
 with a preference for routes that help connect the player's initial Destination Tickets.
 For two-player games, we simulate an equal number of all six pairings of the four
 agents. 
-
-Our modifications to the original code our primarily to simplify
-our analysis and facilitate independent simulations but for one exception:
-The original code allowed agents to buy the same double-route 
-(double-routes are the pairs of routes that connect the same two cities)
-more than once in four-player games.
-In the standard rules, however, one player
-cannot claim both routes to the same cities \cite{moon2004ticket}.
-We adapted the \texttt{get\_free\_connections} method to ensure
-agents cannot buy both double-routes.

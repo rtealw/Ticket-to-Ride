@@ -72,8 +72,31 @@ We dive into the math to explore the deeper structure
 of Destination Tickets.
 
 \subsection{Effective Resistance}
+The \textit{Ticket to Ride} board can conveniently
+be thought of as a graph where cities represent
+nodes and routes represent edges.
+Therefore to analyze the difficulty of connecting a
+pair of cities we can frame the problem in graph theoretic language.
+One of the most powerful and natural measures
+between two nodes on a graph is effective resistance
+\cite{ellens2011effective}.
+Imagine that the \textit{Ticket to Ride} board was
+a large electrical circuit with a unit current
+entering at city $a$ and leaving at city $b$.
+Effective resistance is a measure
+of how much work a current needs to exert
+to get from $a$ to $b$.
+In general, the number of paths and length of routes 
+determine the effective resistance:
+two cities with fewer paths and longer routes
+have a higher effective resistance between them
+than two cities with many paths and shorter routes.
+We calculate the effective resistance for each 
+Destination Ticket in order to gain insight
+into what makes players with some Destination Tickets
+win more often than players with other Destination Tickets.
 
-Can effective resistance help?
+
 \begin{figure*}[!ht]
 \centering
 \includegraphics[scale=.8]{figures/resistance_four}
