@@ -7,6 +7,7 @@ from scipy.special import comb as choose
 import matplotlib.pyplot as plt
 import networkx as nx
 from route_measures_figures import all_measures
+import scipy.stats
 
 def generate_resistance_graph(path="../graph/"):
     edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
@@ -27,8 +28,29 @@ def find_resistance_between_pairs(path="../graph/"):
         pair["resistance"] = pair_resistance
     return pairs
 
+
+def get_metrics(results, results_aux):
+    for key in results_aux.keys():
+        if key not in results:
+            results[key] = results_aux[key]
+    
+    seen = []
+    for var1 in results.keys():
+        for var2 in results.keys():
+            if var1 != var2 and (var2, var1) not in seen:
+                seen += [(var1, var2)]
+                print(var1, var2)
+                get_correlation(results[var1], results[var2])
+
+def get_correlation(var1, var2):
+    r, p = scipy.stats.pearsonr(var1, var2)
+    print(r)
+    print(np.format_float_scientific(p, precision=3))
+
 all_measures()
 
 pairs = find_resistance_between_pairs()
-resistance_figure(pairs=pairs, num_players="two")
-resistance_figure(pairs=pairs, num_players="four")
+results = resistance_figure(pairs=pairs, num_players="two")
+results_aux = resistance_figure(pairs=pairs, num_players="four")
+
+get_metrics(results, results_aux)

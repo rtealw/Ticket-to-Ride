@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import scipy.stats
 plt.rcParams['figure.figsize'] = 10, 5.8
 
 LONG_CITIES = ['ATLANTA', 'BOSTON', 'CALGARY', 'CHARLESTON', 'CHICAGO', 'DALLAS', 'DENVER', 'DULUTH', 'EL PASO', 'HELENA', 'HOUSTON', 'KANSAS CITY', 'LAS VEGAS', 'LITTLE ROCK', 'LOS ANGELES', 'MIAMI', 'MONTREAL', 'NASHVILLE', 'NEW ORLEANS', 'NEW YORK', 'OKLAHOMA CITY', 'OMAHA', 'PHOENIX', 'PITTSBURGH', 'PORTLAND', 'RALEIGH', 'SAINT LOUIS', 'SALT LAKE CITY', 'SAN FRANCISCO', 'SANTA FE', 'SAULT ST. MARIE', 'SEATTLE', 'TORONTO', 'VANCOUVER', 'WASHINGTON', 'WINNIPEG']
@@ -25,10 +26,11 @@ def get_proportions(filename):
 def get_color(cmap, edge, keys, props):
     current_prop = props[keys.index(edge.upper())]
     standardized_prop = (current_prop - min(props)) / (max(props) - min(props))
-    return cmap(standardized_prop)
+    return cmap(standardized_prop), current_prop
 
 def resistance_figure(pairs, num_players):
     xs, ys, props = [], [], []
+    win_props = []
     fig, ax = plt.subplots()
     cmap = plt.cm.get_cmap('RdYlGn')
     keys, props = get_proportions("input/tickets_{}.txt".format(num_players))
@@ -38,7 +40,8 @@ def resistance_figure(pairs, num_players):
         ys.append(y)
         edge = lengthen_edge(pair['city1'], pair['city2'])
         label = "{} {}".format(number, edge)
-        color = get_color(cmap=cmap, edge=edge, keys=keys, props=props)
+        color, current_prop = get_color(cmap=cmap, edge=edge, keys=keys, props=props)
+        win_props += [current_prop]
         ax.annotate(number, (x,y), ha='center', va='center', fontsize=8,
                            bbox=dict(boxstyle="circle,pad=0.3", fc=color))
         ax.scatter(x,y, s=2, label=label)
@@ -78,3 +81,29 @@ def resistance_figure(pairs, num_players):
  
     plt.savefig("../paper/figures/resistance_{}.eps".format(num_players))
     plt.close()
+
+    distances=get_distance(best_fit_func, xs, ys)
+    win_label = str(num_players) + '_proportion'
+    return  {
+        'resistance': xs, 
+        'path_length': ys,
+        win_label : win_props,
+        'distance' : distances
+    }
+
+def get_distance(best_fit_func, xs, ys):
+    # Distance = (| a*x1 + b*y1 + c |) / (sqrt( a*a + b*b))
+    distances = []
+    a = best_fit_func[1]
+    b = -1
+    c = best_fit_func[0]
+    for i in range(len(xs)):
+        x = xs[i]
+        y = ys[i]
+        predicted_y = best_fit_func(x)
+        distance = np.abs(a * x + b*y + c) / np.sqrt(a**2 + b**2)
+        if predicted_y > y:
+            distance *= -1
+        distances += [distance]
+    return distances
+    
