@@ -1,13 +1,13 @@
 import numpy as np
 import pandas as pd
 import csv
+import scipy.stats
+
 from resistance import find_resistance
 from resistance_figures import resistance_figure
-from scipy.special import comb as choose
-import matplotlib.pyplot as plt
-import networkx as nx
+from simulation_figures import readGamesAndGenerateFigures
 from route_measures_figures import all_measures
-import scipy.stats
+
 
 def generate_resistance_graph(path="../graph/"):
     edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
@@ -46,6 +46,9 @@ def get_correlation(var1, var2):
     r, p = scipy.stats.pearsonr(var1, var2)
     print(r)
     print(np.format_float_scientific(p, precision=3))
+
+
+readGamesAndGenerateFigures("../../Ticket-to-Ride-Engine/output/games.txt", limit = 30)
 
 all_measures()
 
