@@ -26,6 +26,7 @@ def generateFigure(keys, freq2, freq4, title, filename, colors, xlabel, include_
         plt.axvline(x=.25,color='red', linestyle='--')
         plt.axvline(x=.5,color='red', linestyle='--')
     plt.savefig(directory + filename)
+    plt.close()
 
 def capAllWords(cities):
     result = ""
@@ -38,9 +39,14 @@ def capAllWords(cities):
 
 def addToTickets(tickets, game):
     num_player = '2-player' if len(game['players']) == 2 else '4-player'
+    agent_names = ["Hungry", "Path", "OneStepThinker", "LongRouteJunkie"]
     for player in game['players']:
-        count = 'win_count' if player in game['winners'] else 'lose_count'
+        winners = game['winners']
+        if not any([player in winners]):
+            winners = [agent_names[i] for i in winners]
+        count = 'win_count' if player in winners else 'lose_count'
         for ticket in game[player]['completed'] + game[player]['uncompleted']:
+            ticket = "/".join(sorted(ticket.split("/")))
             if ticket not in tickets[num_player][count]:
                 tickets[num_player][count][ticket] = 0
             tickets[num_player][count][ticket] += 1
@@ -51,6 +57,7 @@ def addToRoutes(routes, game):
     for player in game['players']:
         player_routes = game[player]['routes']
         for route in player_routes:
+            route = "/".join(sorted(route.split("/"))) 
             if route not in routes[num_player]:
                 routes[num_player][route] = 0
             routes[num_player][route] += 1

@@ -2,11 +2,13 @@ import numpy as np
 import pandas as pd
 import csv
 import scipy.stats
+import resistance
 
-from resistance import find_resistance
-from resistance_figures import resistance_figure
-from simulation_figures import readGamesAndGenerateFigures
-from route_measures_figures import all_measures
+import points_figure
+import simulation_figures
+import route_measures_figures
+import resistance_figures
+
 
 
 def generate_resistance_graph(path="../graph/"):
@@ -24,7 +26,7 @@ def find_resistance_between_pairs(path="../graph/"):
     for pair in pairs:
         index1 = cities.index(pair["city1"])
         index2 = cities.index(pair["city2"])
-        pair_resistance = find_resistance(resistance_graph, index1, index2)
+        pair_resistance = resistance.find_resistance(resistance_graph, index1, index2)
         pair["resistance"] = pair_resistance
     return pairs
 
@@ -47,13 +49,14 @@ def get_correlation(var1, var2):
     print(r)
     print(np.format_float_scientific(p, precision=3))
 
+points_figure.countAndPlot()
 
-readGamesAndGenerateFigures("../../Ticket-to-Ride-Engine/output/games.txt", limit = 30)
+simulation_figures.readGamesAndGenerateFigures("../../Ticket-to-Ride-Engine/output/games.txt", limit = 30)
 
-all_measures()
+route_measures_figures.all_measures()
 
 pairs = find_resistance_between_pairs()
-results = resistance_figure(pairs=pairs, num_players="two")
-results_aux = resistance_figure(pairs=pairs, num_players="four")
+results = resistance_figures.resistance_figure(pairs=pairs, num_players="two")
+results_aux = resistance_figures.resistance_figure(pairs=pairs, num_players="four")
 
 get_metrics(results, results_aux)

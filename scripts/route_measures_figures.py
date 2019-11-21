@@ -35,11 +35,11 @@ def measure_figure(measure, xlabel, filename):
     keys, route_four = get_proportions("input/routes_four.txt")
     route_measure = get_list(keys=keys, measure = measure)
 
-    print(filename)
-    print("routes in two player games")
-    print(scipy.stats.pearsonr(route_two, route_measure))
-    print("routes in four player games")
-    print(scipy.stats.pearsonr(route_four, route_measure))
+#    print(filename)
+#    print("routes in two player games")
+#    print(scipy.stats.pearsonr(route_two, route_measure))
+#    print("routes in four player games")
+#    print(scipy.stats.pearsonr(route_four, route_measure))
 
     plt.scatter(x=route_measure, y=route_two, s=2**6, color="gold", label="Two")
     plt.scatter(x=route_measure, y=route_four, s=2**6, color="black", label="Four")
@@ -56,5 +56,3 @@ def all_measures():
     current_flow = find_current_flow()
     measure_figure(measure=betweenness, xlabel="Betweenness Centrality", filename="betweenness")
     measure_figure(measure=current_flow, xlabel="Current Flow Centrality", filename="current_flow")
-
-#all_measures()
