@@ -40,10 +40,10 @@ def capAllWords(cities):
 def addToTickets(tickets, game):
     num_player = '2-player' if len(game['players']) == 2 else '4-player'
     agent_names = ["Hungry", "Path", "OneStepThinker", "LongRouteJunkie"]
+    winners = game['winners']
+    if not any([player in winners for player in game['players']]):
+        winners = [agent_names[i] for i in winners]
     for player in game['players']:
-        winners = game['winners']
-        if not any([player in winners]):
-            winners = [agent_names[i] for i in winners]
         count = 'win_count' if player in winners else 'lose_count'
         for ticket in game[player]['completed'] + game[player]['uncompleted']:
             ticket = "/".join(sorted(ticket.split("/")))

@@ -35,7 +35,7 @@ def plot(counts, filename, agent_names=["Hungry", "Path", "OneStepThinker", "Lon
     plt.title("Proportion of Wins by Strategy and Points per Train")
     plt.xlabel("Points per Train")
     plt.ylabel("Proportion of Wins")
-    plt.xticks(np.arange(1,2.6,step=.1))
+    plt.xticks(np.arange(1,5.1,step=.2))
     plt.legend()
     plt.savefig(filename)
     plt.close()
