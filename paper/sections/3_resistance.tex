@@ -107,8 +107,8 @@ node $i$ to $j$), then the resistance between $i$ and $j$
 is $(1/r_1 + 1/r_2)^{-1}$.
 
 On a large graph like the \textit{Ticket to Ride} board, 
-the process becomes inefficient.
-We instead use two separate algorithms to find the effective resistance
+we need a more robust strategy.
+We use two separate algorithms to find the effective resistance
 of Destination Tickets
 \cite{ellens2011effective, wu2004theory}.
 Both algorithms calculate the effective resistance by finding 
@@ -123,17 +123,32 @@ of trains of the route connecting them.
 In the case that there are two routes between cities,
 we let the weight be $(1/r + 1/r)^{-1}=r/2$ where
 $r$ is the number of trains of each route.
-Our results appear in \cref{fig:resistance4}
-and \cref{fig:resistance4}.
+Our results appear in \cref{fig:correlation_table},
+\cref{fig:resistance4}, and \cref{fig:resistance4}.
+(Generally p-values below 1E-02 indicate
+strong correlation.)
+
+\end{multicols}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[scale=1]{figures/correlation_table}
+    \caption{The Pearson p-value for linear relationships
+    between effective resistance, minimum path length,
+    proportion of two-player wins, proportion of four-player
+    wins, and distance from the line of best fit.
+    Darker gold indicates stronger correlation.}
+    \label{fig:correlation_table}
+\end{figure}
+\begin{multicols}{2}
 
 \end{multicols}
 \begin{figure}
     \centering
     \begin{subfigure}[b]{\textwidth}
         \includegraphics[scale=.65]{figures/resistance_four}
-        \caption{Destination Tickets by their effective
-        resistance and minimum path length and colored
-        by the proportion of wins in four-player games.
+        \caption{Destination Tickets colored by the proportion
+        of wins in four-player games and plotted by their effective
+        resistance and minimum path length.
         The line of best fit gives an approximation of the
         Destination Tickets that are better deals (above the line).
         Note: the $16^{th}$ Destination Ticket Portland/Phoenix is obscured
@@ -150,11 +165,3 @@ and \cref{fig:resistance4}.
 \end{figure}
 \begin{multicols}{2}
 
-\end{multicols}
-\begin{figure}
-    \centering
-    \includegraphics{figures/correlation_table}
-    \caption{Caption}
-    \label{fig:correlation_table}
-\end{figure}
-\begin{multicols}{2}
