@@ -88,7 +88,7 @@ def get_metrics(results, results_aux):
     table.set_fontsize(14)
     table.scale(1,4)
     ax.axis('off')
-    plt.savefig("../paper/figures/correlation_table.eps")
+    plt.savefig("../paper/figures/pearsons_table.eps")
 
 def get_correlation(var1, var2):
     r, p = scipy.stats.pearsonr(var1, var2)
