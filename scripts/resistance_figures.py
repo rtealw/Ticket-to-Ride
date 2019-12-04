@@ -48,7 +48,7 @@ def resistance_figure_no_props(pairs):
     plt.xlim(min(xs) * .5, max(xs) * 1.1)
     plt.ylim(min(ys) * .5, max(ys) * 1.1)
     plt.yticks(range(min(ys), max(ys)+1, 2)) # integer y axis
-    plt.title("Destination Tickets by Reward and Difficulty")
+    plt.title("Destination Tickets by Length of Minimum Path and Effective Resistance")
     plt.ylabel("Length of Minimum Path")
     plt.xlabel("Effective Resistance")
     legend = ax.legend(
