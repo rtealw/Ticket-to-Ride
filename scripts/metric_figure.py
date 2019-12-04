@@ -21,29 +21,30 @@ def get_metrics(results, results_aux):
         "two_proportion",
         "four_proportion"
     ]
+    
+    row_variables = ["path_length", "resistance", "distance"]
+    col_variables = ["two_proportion", "four_proportion"]
 
-    table_colors = [["#ffffff"] * len(variables)]
-    table_data = [[""] + [var_to_name[var] for var in variables[1:]]]
+    table_colors = [["#ffffff"] * (1 + len(col_variables))]
+    table_data = [[""] + [var_to_name[var] for var in col_variables]]
 
-    for i in range(len(results.keys())-1):
-        var1 = variables[i]
+    for i in range(len(row_variables)):
+        var1 = row_variables[i]
         color_row = ["#ffffff"]
         data_row = [var_to_name[var1]]
-        for j in range(i):
-            color_row += ["#ffffff"]
-            data_row += [""]
-        for j in range(i+1, len(results.keys())):
-            var2 = variables[j]
+        for j in range(len(col_variables)):
+            var2 = col_variables[j]
             r, p = get_correlation(results[var1], results[var2])
             color_row += ["#ffffff"]
-            if p < 1E-3:
-                r = str(r) + '***'
+            for n in range(10, 0, -1):
+                if p < eval('1e-{}'.format(n)):
+                    r = str(r) + '*'*n
+                    break
+            if p < 1E-5:
                 color_row[-1]= "#607c3c"
-            elif p < 1E-2:
-                r = str(r) + '**'
+            elif p < 1E-4:
                 color_row[-1]= "#809c13"
-            elif p < 1E-1:
-                r = str(r) + '*' 
+            elif p < 1E-2:
                 color_row[-1]= "#abc32f"
 
             data_row += [r]
@@ -52,7 +53,7 @@ def get_metrics(results, results_aux):
 
     fig = plt.figure(dpi=80)
     ax = fig.add_subplot(1,1,1)
-    table = ax.table(cellText=table_data, cellColours=table_colors, loc='center')
+    table = ax.table(cellText=table_data, cellColours=table_colors, colWidths=[.13,.15,.15], cellLoc='center', loc='center')
     table.set_fontsize(14)
     table.scale(1,4)
     ax.axis('off')
