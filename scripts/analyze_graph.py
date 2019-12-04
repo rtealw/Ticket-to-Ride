@@ -32,12 +32,12 @@ def find_resistance_between_pairs(path="../graph/"):
         pair["resistance"] = pair_resistance
     return pairs
 
-#points_figure.countAndPlot()
-#
-#simulation_figures.readGamesAndGenerateFigures("../../Ticket-to-Ride-Engine/output/games.txt", limit = 30)
-#
-#route_measures_figures.all_measures()
-#
+points_figure.countAndPlot()
+
+simulation_figures.readGamesAndGenerateFigures("../../Ticket-to-Ride-Engine/output/games.txt", limit = 30)
+
+route_measures_figures.all_measures()
+
 pairs = find_resistance_between_pairs()
 results = resistance_figures.resistance_figure(pairs=pairs, num_players="two")
 results_aux = resistance_figures.resistance_figure(pairs=pairs, num_players="four")

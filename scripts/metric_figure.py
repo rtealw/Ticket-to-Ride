@@ -35,16 +35,16 @@ def get_metrics(results, results_aux):
         for j in range(i+1, len(results.keys())):
             var2 = variables[j]
             r, p = get_correlation(results[var1], results[var2])
-            color_row += ["#ffee82"]
+            color_row += ["#ffffff"]
             if p < 1E-3:
                 r = str(r) + '***'
-                color_row[-1]= "#b31313"
+                color_row[-1]= "#607c3c"
             elif p < 1E-2:
                 r = str(r) + '**'
-                color_row[-1]= "#ff9000"
+                color_row[-1]= "#809c13"
             elif p < 1E-1:
                 r = str(r) + '*' 
-                color_row[-1]= "#fdda16"
+                color_row[-1]= "#abc32f"
 
             data_row += [r]
         table_colors += [color_row]
