@@ -38,7 +38,7 @@ def get_metrics(results, results_aux):
             color_row += ["#ffffff"]
             for n in range(10, 0, -1):
                 if p < eval('1e-{}'.format(n)):
-                    r = str(r) + '*'*n
+                    r = str(r) + '*'*(n//2)
                     break
             if p < 1E-5:
                 color_row[-1]= "#607c3c"
