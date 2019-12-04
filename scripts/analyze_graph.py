@@ -39,7 +39,8 @@ def find_resistance_between_pairs(path="../graph/"):
 #route_measures_figures.all_measures()
 
 pairs = find_resistance_between_pairs()
-results = resistance_figures.resistance_figure(pairs=pairs, num_players="two")
-results_aux = resistance_figures.resistance_figure(pairs=pairs, num_players="four")
+results = resistance_figures.resistance_figure_no_props(pairs=pairs)
+results_two = resistance_figures.resistance_figure(pairs=pairs, num_players="two")
+results_four = resistance_figures.resistance_figure(pairs=pairs, num_players="four")
 
-metric_figure.get_metrics(results, results_aux)
+metric_figure.get_metrics(results_two, results_four)
