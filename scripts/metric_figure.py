@@ -54,7 +54,7 @@ def get_metrics(results, results_aux):
     fig = plt.figure(dpi=80)
     ax = fig.add_subplot(1,1,1)
     table = ax.table(cellText=table_data, cellColours=table_colors, colWidths=[.1,.15,.15], cellLoc='center', loc='center')
-    table.scale(2,2)
+    table.scale(2,4)
     ax.axis('off')
     plt.savefig("../paper/figures/pearsons_table.eps", bbox_inches='tight')
 
