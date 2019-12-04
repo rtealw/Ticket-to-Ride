@@ -162,19 +162,28 @@ When one player's stock of 45 trains dips below 3 trains at the end of their tur
 every player (including that player) gets one final turn.
 
 \subsection{Simulations}
-To simulate \textit{Ticket to Ride} games, we adapted Silva et al.'s program
-\cite{silva2019, witter2019}.
-We maintained the vast majority of the program structure and run our simulations
-on the regular U.S.A. map.
-For four-player games, we include each of Silva et al.'s four agent types.
-The Destination Hungry Agent chooses Destination Tickets at the beginning of the
-game--with an emphasis on Destination Tickets that are geographically close--
+We used Silva et al.'s program to simulate
+\textit{Ticket to Ride} games \cite{silva2019}.
+We run our simulations on the regular U.S.A. map.
+For four-player games, we include each of Silva et al.'s 
+four agent types:
+The Destination Hungry Agent chooses 
+Destination Tickets at the beginning of the
+game--with an emphasis on Destination 
+Tickets that are geographically close--
 and tries to connect them for the rest of the game.
 The Route Focused Agent works toward a longer Destination Ticket then
 claims longer routes.
 The One Step Agent operates by choosing the most advantageous move at each
 step without a long term strategy.
 The Long Route Agent claims longer routes (defined as four trains or more)
-with a preference for routes that help connect the player's initial Destination Tickets.
-For two-player games, we simulate an equal number of all six pairings of the four
-agents. 
+with a preference for routes that help 
+connect the player's initial Destination Tickets.
+For two-player games, we simulate an equal number 
+of all six pairings of the four agents.
+Our forked verision of Silva et al.'s
+Github repository is publicly available online
+\cite{witter2019}.
+
+\subsection{Overview}
+\todo{write section}
