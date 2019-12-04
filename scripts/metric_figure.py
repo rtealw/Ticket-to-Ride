@@ -1,29 +1,25 @@
 import matplotlib.pyplot as plt
 import scipy
 
-def get_metrics(results, results_aux):
-    for key in results_aux.keys():
+def get_metrics(results, results2, results3):
+    for key in results2.keys():
         if key not in results:
-            results[key] = results_aux[key]
+            results[key] = results2[key]
+    for key in results3.keys():
+        if key not in results:
+            results[key] = results3[key]
 
     var_to_name = {
         "resistance":"Resistance",
         "path_length":"Path Length",
         "two_proportion":"Two-Player Wins",
         "distance":"Distance",
-        "four_proportion":"Four-Player Wins"
+        "four_proportion":"Four-Player Wins",
+        "aggregate_proportion":"Overall Wins"
     }
     
-    variables = [
-        "path_length",
-        "resistance",
-        "distance",
-        "two_proportion",
-        "four_proportion"
-    ]
-    
     row_variables = ["path_length", "resistance", "distance"]
-    col_variables = ["two_proportion", "four_proportion"]
+    col_variables = ["two_proportion", "four_proportion", "aggregate_proportion"]
 
     table_colors = [["#ffffff"] * (1 + len(col_variables))]
     table_data = [[""] + [var_to_name[var] for var in col_variables]]
@@ -53,7 +49,7 @@ def get_metrics(results, results_aux):
 
     fig = plt.figure(dpi=80)
     ax = fig.add_subplot(1,1,1)
-    table = ax.table(cellText=table_data, cellColours=table_colors, colWidths=[.1,.15,.15], cellLoc='center', loc='center')
+    table = ax.table(cellText=table_data, cellColours=table_colors, colWidths=[.069,.1,.1, .1], cellLoc='center', loc='center')
     table.scale(2,4)
     ax.axis('off')
     plt.savefig("../paper/figures/pearsons_table.eps", bbox_inches='tight')
