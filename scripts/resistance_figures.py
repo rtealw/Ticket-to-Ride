@@ -78,7 +78,7 @@ def resistance_figure_aggregate(pairs):
     cmap = plt.cm.get_cmap('RdYlGn')
     keys, props_two = get_proportions("input/tickets_two.txt")
     keys, props_four = get_proportions("input/tickets_four.txt")
-    props = [.5 * props_two[i] + .5 * props_four[i] for i in range(len(keys))]
+    props = [.5 * (props_two[i] - .25 + props_four[i] -.5) for i in range(len(keys))]
     for pair in pairs:
         x, y, number = pair['resistance'], pair['min_path'], pair['number']
         xs.append(x)
@@ -104,7 +104,7 @@ def resistance_figure_aggregate(pairs):
     plt.ylim(min(ys) * .5, max(ys) * 1.1)
     plt.yticks(range(min(ys), max(ys)+1, 2)) # integer y axis
     title = "Destination Tickets by Length of Minimum Path and Effective Resistance"
-    subtitle = "Colored by Proportion of Overall Wins"
+    subtitle = "Colored by Difference from Expected Proportion of Wins"
     plt.title("{}\n{}".format(title, subtitle))
     plt.xlabel("Effective Resistance")
     plt.ylabel("Length of Minimum Path")
@@ -120,7 +120,7 @@ def resistance_figure_aggregate(pairs):
     cbaxes = fig.add_axes([.05, box.y0, 0.01, box.height])
     cbar = fig.colorbar(plt.cm.ScalarMappable(cmap=cmap), ax=ax, cax=cbaxes)
     cbar_labels = [min(props) + x * (max(props) - min(props))/5 for x in range(6)]
-    cbar.ax.set_yticklabels([str(round(label, 2))[1:] for label in cbar_labels])
+    cbar.ax.set_yticklabels([str(round(label, 2))for label in cbar_labels])
     cbar.ax.yaxis.set_ticks_position('left')
     cbar.ax.set_label("Proportion of Wins")
  
