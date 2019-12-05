@@ -71,8 +71,8 @@ We dive into the math to explore the deeper structure
 of Destination Tickets.
 
 \subsection{Effective Resistance}
-The \textit{Ticket to Ride} board can conveniently
-be thought of as a graph where cities represent
+The \textit{Ticket to Ride} board can mathematically
+be interpreted as a graph where cities represent
 nodes and routes represent edges.
 Therefore to analyze the difficulty of connecting a
 pair of cities we can frame the problem in graph theoretic language.
@@ -122,17 +122,15 @@ of trains of the route connecting them.
 In the case that there are two routes between cities,
 we let the weight be $(1/r + 1/r)^{-1}=r/2$ where
 $r$ is the number of trains of each route.
-Our results appear in \cref{fig:correlation_table},
-\cref{fig:resistance2}, and \cref{fig:resistance4}.
+Our results appear in \cref{fig:correlation_table}
+and \cref{fig:resistance}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=.12]{figures/pearsons_table.png}
     \caption{The Pearson correlation statistic between
-    proportion of wins in two- and four-player games
-    and path length, resistance, and distance from
-    the best fit line of \cref{fig:resistance2} and
-    \cref{fig:resistance4}.
+    the win proportion of Destination Tickets
+    and measures of difficulty.
     A single asterisk (in light green) indicates a p-value
     below 1E-2. Double asterisks (in green) indicate a
     p-value below 1E-4. Triple asterisks (in dark green)
@@ -143,9 +141,10 @@ Our results appear in \cref{fig:correlation_table},
 \end{multicols}
 \begin{figure}
     \centering
-    \includegraphics[scale=.6]{figures/resistance}
+    \includegraphics[scale=.6]{figures/resistance_aggregate}
     \caption{Destination Tickets plotted by their effective
-    resistance and minimum path length.
+    resistance and minimum path length and colored
+    by overall proportion of wins.
     The line of best fit gives an approximation of the
     Destination Tickets that have a higher reward per difficulty
     (above the line).
