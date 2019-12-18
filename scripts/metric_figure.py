@@ -1,7 +1,39 @@
 import matplotlib.pyplot as plt
 import scipy
+import numpy as np
+
+def generate_figures(aggregate_results, var_to_name):
+    x_names = ['path_length', 'resistance', 'distance']
+    old_figsize = plt.rcParams['figure.figsize']
+    for i in range(len(x_names)):
+        plt.rcParams["figure.figsize"] = [6, 5]
+        x = x_names[i]
+        xs = aggregate_results[x]
+        ys = aggregate_results['aggregate_proportion']
+        if x == 'path_length':
+            plt.xticks(np.arange(min(xs), max(xs)+1, 2))
+        plt.scatter(x=xs, y= ys, color="black")
+        plt.xlabel(var_to_name[x])
+        y_name = 'Proportion of Wins'
+        plt.ylabel(y_name)
+        plt.title('Destination Tickets by {} and {}'.format(var_to_name[x], y_name))
+        interval = np.linspace(min(xs), max(xs), 100)
+        best_fit_func = np.poly1d(np.polyfit(xs, ys, deg=1))
+        plt.plot(interval, best_fit_func(interval), color="black")
+        plt.savefig("../paper/figures/correlation{}.eps".format(i), bbox_inches='tight')
+        plt.close()
+    plt.rcParams['figure.figsize'] = old_figsize
 
 def get_metrics(results, results2, results3):
+    var_to_name = {
+        "resistance":"Resistance",
+        "path_length":"Path Length",
+        "two_proportion":"Two-Player Wins",
+        "distance":"Residual",
+        "four_proportion":"Four-Player Wins",
+        "aggregate_proportion":"Overall Wins"
+    }
+ 
     for key in results2.keys():
         if key not in results:
             results[key] = results2[key]
@@ -9,15 +41,8 @@ def get_metrics(results, results2, results3):
         if key not in results:
             results[key] = results3[key]
 
-    var_to_name = {
-        "resistance":"Resistance",
-        "path_length":"Path Length",
-        "two_proportion":"Two-Player Wins",
-        "distance":"Distance",
-        "four_proportion":"Four-Player Wins",
-        "aggregate_proportion":"Overall Wins"
-    }
-    
+    generate_figures(results3, var_to_name)
+   
     row_variables = ["path_length", "resistance", "distance"]
     col_variables = ["two_proportion", "four_proportion", "aggregate_proportion"]
 
