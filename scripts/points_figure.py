@@ -30,8 +30,11 @@ def read_file(filename, agent_names=["Hungry", "Path", "OneStepThinker", "LongRo
 
 
 def plot(counts, filename, agent_names=["Hungry", "Path", "OneStepThinker", "LongRouteJunkie"]):
-    for agent_name in agent_names:
-        plt.plot(counts['alpha'], counts[agent_name], label=agent_name)
+    colors = ['gold', '#d55e00', '#56b4e9', '#009e73']
+    for i in range(len(agent_names)):
+        color = colors[i]
+        agent_name = agent_names[i]
+        plt.plot(counts['alpha'], counts[agent_name], label=agent_name, color=color)
     plt.title("Proportion of Wins by Strategy and Points per Train")
     plt.xlabel("Points per Train")
     plt.ylabel("Proportion of Wins")
