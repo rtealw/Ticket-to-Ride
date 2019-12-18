@@ -10,9 +10,6 @@ import route_measures_figures
 import resistance_figures
 import metric_figure
 
-
-
-
 def generate_resistance_graph(path="../graph/"):
     edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
     is_double = pd.read_csv('{}is_double.csv'.format(path), index_col=0)
