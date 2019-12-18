@@ -14,7 +14,7 @@ def generate_figures(aggregate_results, var_to_name):
             plt.xticks(np.arange(min(xs), max(xs)+1, 5))
         plt.scatter(x=xs, y= ys, color="black")
         plt.xlabel(var_to_name[x])
-        y_name = 'Proportion of Wins'
+        y_name = 'Overall Wins'
         plt.ylabel(y_name)
         plt.title('Destination Tickets by {}'.format(var_to_name[x], y_name))
         interval = np.linspace(min(xs), max(xs), 100)
