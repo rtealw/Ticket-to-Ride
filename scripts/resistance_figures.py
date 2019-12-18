@@ -104,7 +104,7 @@ def resistance_figure_aggregate(pairs):
     plt.ylim(min(ys) * .5, max(ys) * 1.1)
     plt.yticks(range(min(ys), max(ys)+1, 2)) # integer y axis
     title = "Destination Tickets by Length of Minimum Path and Effective Resistance"
-    subtitle = "Colored by Difference from Expected Proportion of Wins"
+    subtitle = "Colored by Proportion of Wins"
     plt.title("{}\n{}".format(title, subtitle))
     plt.xlabel("Effective Resistance")
     plt.ylabel("Length of Minimum Path")
@@ -208,9 +208,10 @@ def get_distance(best_fit_func, xs, ys):
         x = xs[i]
         y = ys[i]
         predicted_y = best_fit_func(x)
-        distance = np.abs(a * x + b*y + c) / np.sqrt(a**2 + b**2)
+        distance = np.abs(a * x + b*y + c) #/ np.sqrt(a**2 + b**2)
         if predicted_y > y:
             distance *= -1
+        distance = y - predicted_y
         distances += [distance]
     return distances
     
