@@ -6,17 +6,17 @@ def generate_figures(aggregate_results, var_to_name):
     x_names = ['path_length', 'resistance', 'distance']
     old_figsize = plt.rcParams['figure.figsize']
     for i in range(len(x_names)):
-        plt.rcParams["figure.figsize"] = [6, 5]
+        plt.rcParams["figure.figsize"] = [4, 3]
         x = x_names[i]
         xs = aggregate_results[x]
         ys = aggregate_results['aggregate_proportion']
         if x == 'path_length':
-            plt.xticks(np.arange(min(xs), max(xs)+1, 2))
+            plt.xticks(np.arange(min(xs), max(xs)+1, 5))
         plt.scatter(x=xs, y= ys, color="black")
         plt.xlabel(var_to_name[x])
         y_name = 'Proportion of Wins'
         plt.ylabel(y_name)
-        plt.title('Destination Tickets by {} and {}'.format(var_to_name[x], y_name))
+        plt.title('Destination Tickets by {}'.format(var_to_name[x], y_name))
         interval = np.linspace(min(xs), max(xs), 100)
         best_fit_func = np.poly1d(np.polyfit(xs, ys, deg=1))
         plt.plot(interval, best_fit_func(interval), color="black")
