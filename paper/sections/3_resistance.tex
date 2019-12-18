@@ -1,10 +1,10 @@
 %%novalidate
 \newpage
-\section{Destination Tickets \& Effective Resistance}
+\section{Destination Tickets}
 
-\subsection{Destination Tickets \& Winning}
+\subsection{Winning}
 An obvious strategy in \textit{Ticket to Ride} is to collect
-Destination Tickets and buy routes so as to connect them.
+Destination Tickets and buy routes to connect them.
 We investigate the effect of collecting Destination Tickets
 on winning the game.
 We simulate 10,000 two-player and 10,000 four-player games.
@@ -28,47 +28,34 @@ if Destination Tickets had no effect.}
 \end{figure}
 \begin{multicols}{2}
 
-The vertical red lines at $1/4$ and $1/2$ indicate
+The vertical red lines at .25 and .5 indicate
 the expected proportion of wins if Destination Tickets
 had no effect on winning: players in two-player games
 would win half the time and players in four-player games
 would win a quarter of the time.
 
-Remarkably, there are no Destination Tickets in four-player
-games that win more than $25\%$ of all games.
-This would be impossible if all players had the same number
-of Destination Tickets because \textit{some} player must win every
-game.
-Therefore the implication is that players who spend their
-turns collecting more Destination Tickets win less frequently
-than those who take Train Cards or claim routes.
-Within the set of Destination Tickets in four-player games,
-some still do even worse.
-New York to Seattle, Los Angeles to New York, Los Angeles to Miami,
-and Montreal to Vancouver have especially low win rates.
-A quick inspection of \cref{fig:board} shows that all four pairs of cities
-are particularly far apart (in terms of both geography and the
-length of the shortest paths between them).
-Perhaps these longer Destination Tickets are harder to connect and,
-in the common case that players cannot connect them, subtract an insurmountable
-number of points from players' final scores.
+In two-player games, there are 13 Destination Tickets 
+that win more than the expected $50\%$ of games.
+In four-player games, there are only eight Destination Tickets
+that clearly win more than the expected $25\%$ of games plus
+another four on the borderline.
+That is, out of the 30 Destination Tickets, roughly a third
+in both two- and four-player games win more than expected.
+The implication is that a randomly chosen Destination 
+Ticket is not advantageous.
+However, a subset of Destination Tickets--approximately the same
+set for both two- and four-player games--wins more often than expected.
+The ones that win the most from the subset are Montreal to Vancouver,
+New York to Seattle, and Chicago to Los Angeles.
+An inspection of \cref{fig:board} shows that the paths between 
+these three Destination Tickets are some of the longest on the board 
+and also have some of the longest routes.
 
-Destination Tickets in two-player games also mostly fall
-below the threshold of wins we would expect if there were
-no relationship between winning and Destination Tickets.
-But, unlike four-player games, some Destination Tickets
-win more than expected: Montreal to Vancouver,
-Los Angeles to Miami, Chicago to Los Angeles, and
-Denver to Pittsburgh.
-Ironically, the cities that won the least often in four-player
-games now win the most often in two-player games.
-Perhaps the longer Destination Tickets are easier
-to connect in two-player than four-player games
-and, unlike the other Destination Tickets, add
-a substantial number of points to the final score.
-
-We dive into the math to explore the deeper structure
-of Destination Tickets.
+In the rest of this section, we investigate the characteristics of
+Destination Tickets that most closely correlate with
+winning.
+We begin in the next subsection by developing a measure
+of the difficulty of connecting one city to another.
 
 \subsection{Effective Resistance}
 The \textit{Ticket to Ride} board can mathematically
@@ -122,8 +109,43 @@ of trains of the route connecting them.
 In the case that there are two routes between cities,
 we let the weight be $(1/r + 1/r)^{-1}=r/2$ where
 $r$ is the number of trains of each route.
+
+In the next subsection, we calculate the effective
+resistance of all Destination Tickets as a tool
+to find what most closely correlates with winning.
+
+\subsection{Winning \& Effective Resistance}
+
+In \cref{fig:resistance},
+Destination Tickets are plotted by their effective resistance
+and minimum path length.
+Recall that the reward for connecting a Destination Ticket
+is the length of the shortest path between its two cities.
+Since effective resistance measures the difficulty of
+connecting the two cities, the line of best fit in \cref{fig:resistance}
+indicates reward per difficulty.
+The Destination Tickets above the line of best fit have
+a higher reward per difficulty whereas those below the line of best fit
+have a lower reward per difficulty.
+
 Our results appear in \cref{fig:correlation_table}
 and \cref{fig:resistance}.
+
+\end{multicols}
+\begin{figure}
+    \centering
+    \includegraphics[scale=.5]{figures/resistance_aggregate}
+    \caption{Destination Tickets plotted by their effective
+    resistance and minimum path length and colored
+    by overall proportion of wins.
+    The line of best fit gives an approximation of the
+    Destination Tickets that have a higher reward per difficulty
+    (above the line).
+    Note: the $9^{th}$ Destination Ticket 
+    is obscured by the $11^{th}$.}
+    \label{fig:resistance}
+\end{figure}
+\begin{multicols}{2}
 
 \begin{figure}[H]
     \centering
@@ -137,46 +159,3 @@ and \cref{fig:resistance}.
     indicate a p-value below 1E-6.}
     \label{fig:correlation_table}
 \end{figure}
-
-\end{multicols}
-\begin{figure}
-    \centering
-    \includegraphics[scale=.6]{figures/resistance_aggregate}
-    \caption{Destination Tickets plotted by their effective
-    resistance and minimum path length and colored
-    by overall proportion of wins.
-    The line of best fit gives an approximation of the
-    Destination Tickets that have a higher reward per difficulty
-    (above the line).
-    Note: the $9^{th}$ Destination Ticket 
-    is obscured by the $11^{th}$.}
-    \label{fig:resistance}
-\end{figure}
-\begin{multicols}{2}
-
-
-%\end{multicols}
-%\begin{figure}
-%    \centering
-%    \begin{subfigure}[b]{\textwidth}
-%        \includegraphics[scale=.75]{figures/resistance_two}
-%        \caption{Destination Tickets colored by the proportion
-%        of wins in two-player games and plotted by their effective
-%        resistance and minimum path length.
-%        The line of best fit gives an approximation of the
-%        Destination Tickets that have a higher reward per effort
-%        (above the line).
-%        Note: the $9^{th}$ Destination Ticket 
-%        is obscured by the $11^{th}$.}
-%        \label{fig:resistance2}
-%    \end{subfigure}
-%    \vfill
-%    \begin{subfigure}[b]{\textwidth}
-%        \includegraphics[scale=.75]{figures/resistance_four}
-%        \caption{\cref{fig:resistance2} colored by proportion
-%        of wins in four-player rather than two-player games.}
-%        \label{fig:resistance4}
-%    \end{subfigure}
-%\end{figure}
-%\begin{multicols}{2}
-
