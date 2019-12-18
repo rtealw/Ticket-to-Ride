@@ -160,23 +160,36 @@ and \cref{fig:resistance}.
     \label{fig:correlation_table}
 \end{figure}
 
+\end{multicols}
 \begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.33\textwidth}
         \centering
-        \includegraphics[height=1.5in]{figures/correlation0}
-        \caption{One}
+        \includegraphics[height=1.7in]{figures/correlation0}
     \end{subfigure}%
     ~ 
     \begin{subfigure}[t]{0.33\textwidth}
         \centering
-        \includegraphics[height=1.5in]{figures/correlation1}
-        \caption{One}
+        \includegraphics[height=1.7in]{figures/correlation1}
     \end{subfigure}%
     ~ 
     \begin{subfigure}[t]{0.33\textwidth}
         \centering
-        \includegraphics[height=1.5in]{figures/correlation2}
-        \caption{One}
+        \includegraphics[height=1.7in]{figures/correlation2}
     \end{subfigure}%
+    \caption{Destination Tickets by the
+    difference between the expected proportion of wins
+    and (possibly) correlated variables.
+    A y-value of .05 indicates that a player with a
+    particular Destination Ticket won on average $30\%$ of
+    four-player games (rather than the expected $25\%$)
+    and $55\%$ of two-player games 
+    (rather than the expected $50\%$).
+    The three subfigures are consistent with the 
+    Pearson correlation statistics in
+    \cref{fig:correlation_table}:
+    Path Length is a good predictor of Overall Wins,
+    Resistance is not a good predictor of Overall Wins,
+    and Residual is a very good predictor of Overall Wins.}
 \end{figure}
+\begin{multicols}{2}
