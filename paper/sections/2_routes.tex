@@ -149,17 +149,34 @@ and, by plugging in the values of $|C|$ and $|B|$,
     \E[N_k] &= \left(1 + \frac{110 - 12}{12 + 1} \right)k \nonumber \\
     &= \frac{111}{13}k. \nonumber
 \end{align}
-While the value $111/13$ has no obvious units or interpretation,
+While  $111/13$ has no obvious units or interpretation,
 we have learned that $\E[N_k]$ is proportional to $k$.
-That is, $\E[N_k] = \alpha k$ for some $\alpha$.
-If we use $\E[N_k]$ as the points scored by buying a route of length
-$k$, the value of $\alpha$ will matter relative to the points from
-connecting Destination Tickets and the longest path.
-In the next section, we use Silva et al.'s simulation
-to find the $\alpha$ for which their longest route
-agent wins roughly as often as their other agents.
+That is, the expected number of cards needed to
+purchase a route is proportional to the length of the route.
 
 \subsection{Optimal Route Value via Simulations}
+We contend that the reward for purchasing a route 
+should be related to the effort expended to do so.
+Using the number of cards needed to purchase a route 
+as a proxy for effort, it is clear from \cref{sec:collecting_cards}
+that the reward for a route should be proportional to
+its length.
+However, we do not know the correct value of the constant $\alpha$
+for $\E[N_k] = \alpha k$.
+
+In order to choose a good $\alpha$, we simulate 
+\textit{Ticket to Ride} games and track how various
+strategies perform.
+For each $\alpha$ between 1 and 5 in .2 increments,
+we simulate 1000 games where the reward for a route
+of length $k$ is $\alpha k$.
+The results appear in \cref{fig:points}.
+
+The proportion of wins of the Hungry, Path, and One
+Step Thinker strategies does not significantly
+vary with $\alpha$.
+The Hungry, Path, and One Step Thinker
+strategies do not 
 
 \end{multicols}
 \begin{figure}
@@ -167,8 +184,6 @@ agent wins roughly as often as their other agents.
     \includegraphics[scale=.69]{figures/points}
     \caption{The proportion of wins of each of the four strategies
     by the number of points earned per train in 1000 games.}
-    \label{fig:resistance}
+    \label{fig:points}
 \end{figure}
 \begin{multicols}{2}
-
-\todo{explanation}
