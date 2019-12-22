@@ -221,15 +221,18 @@ of which Destination Tickets win,
 the residual from the model built from effective resistance
 is even better (\cref{fig:correlation_table} and
 \cref{fig:correlation_figures}).
-It is certainly easier to compare path length when choosing
-between Destination Tickets in real time.
-But learning the advantageous Destination Tickets may be worthwhile:
-As a general rule, Destination Tickets with a minimum path
+\cref{fig:rankings} shows the change in rankings
+between path length and residual.
+
+Even though it is easier to compare path length when choosing
+between Destination Tickets in real time,
+learning the most advantageous Destination Tickets may be worthwhile:
+as a general rule, Destination Tickets with a minimum path
 longer than 15 trains or those with small effective resistance
 (many short paths) outperform their counterparts.
 
 Referring to \cref{fig:resistance}, 
-we now advance several explanations for why Destination Tickets 
+we provide several explanations for why Destination Tickets 
 win more than expected.
 The Destination Tickets with more than 15 trains 
 enjoy high rewards and middle-of-the-pack 
@@ -241,16 +244,19 @@ above the line of best fit--seem to be more affected
 by resistance: the higher the resistance, the
 lower the proportion of wins.
 Perhaps because the resistance between these pairs of cities
-is roughly comparable, those that can be connected more easily
-help players more.
+is roughly comparable, Destination Tickets that 
+can be connected more easily help players more.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=1]{figures/rankings}
+    \includegraphics[scale=.25]{figures/rankings.png}
     \caption{Destination Tickets ordered by path length
-    in the left column (triangles) and by residual
+    in the left column (circles) and by residual
     in the right column (squares). The color
-    corresponds to the proportion of wins and scale
-    in \cref{fig:resistance}.}
+    corresponds to the proportion of overall wins (scale
+    from \cref{fig:resistance}).
+    Lines indicate the change in rank between
+    the two orderings.}
     \label{fig:rankings}
 \end{figure}
+
