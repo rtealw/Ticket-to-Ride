@@ -78,6 +78,9 @@ def get_metrics(results, results2, results3):
     table.scale(2,4)
     ax.axis('off')
     plt.savefig("../paper/figures/pearsons_table.eps", bbox_inches='tight')
+    results_file = open("input/results.txt", "w")
+    results_file.write(str(results))
+    results_file.close()
 
 def get_correlation(var1, var2):
     r, p = scipy.stats.pearsonr(var1, var2)

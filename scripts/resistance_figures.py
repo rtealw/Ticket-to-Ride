@@ -29,13 +29,14 @@ def get_color(cmap, edge, keys, props):
     return cmap(standardized_prop), current_prop
 
 def resistance_figure_no_props(pairs):
-    xs, ys = [], []
+    xs, ys, names = [], [], []
     fig, ax = plt.subplots()
     for pair in pairs:
         x, y, number = pair['resistance'], pair['min_path'], pair['number']
         xs.append(x)
         ys.append(y)
         edge = lengthen_edge(pair['city1'], pair['city2'])
+        names.append(edge)
         label = "{} {}".format(number, edge)
         ax.annotate(number, (x,y), ha='center', va='center', fontsize=8,
                     bbox=dict(boxstyle="circle,pad=0.3", fc='white'))
@@ -68,11 +69,12 @@ def resistance_figure_no_props(pairs):
     return  {
         'resistance': xs, 
         'path_length': ys,
-        'distance' : distances
+        'distance' : distances,
+        'names' : names
     }
 
 def resistance_figure_aggregate(pairs):
-    xs, ys, props = [], [], []
+    xs, ys, props, names = [], [], [], []
     win_props = []
     fig, ax = plt.subplots()
     cmap = plt.cm.get_cmap('RdYlGn')
@@ -84,6 +86,7 @@ def resistance_figure_aggregate(pairs):
         xs.append(x)
         ys.append(y)
         edge = lengthen_edge(pair['city1'], pair['city2'])
+        names.append(edge)
         label = "{} {}".format(number, edge)
         color, current_prop = get_color(cmap=cmap, edge=edge, keys=keys, props=props)
         win_props += [current_prop]
@@ -132,7 +135,8 @@ def resistance_figure_aggregate(pairs):
         'resistance': xs, 
         'path_length': ys,
         'aggregate_proportion' : win_props,
-        'distance' : distances
+        'distance' : distances,
+        'names' : names
     }
 
 def resistance_figure(pairs, num_players):

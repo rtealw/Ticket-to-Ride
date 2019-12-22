@@ -29,16 +29,42 @@ def find_resistance_between_pairs(path="../graph/"):
         pair["resistance"] = pair_resistance
     return pairs
 
-points_figure.countAndPlot()
+#points_figure.countAndPlot()
+#
+#simulation_figures.readGamesAndGenerateFigures("../../Ticket-to-Ride-Engine/output/games.txt", limit = 30)
+#
+#route_measures_figures.all_measures()
+#
+#pairs = find_resistance_between_pairs()
+#resistance_figures.resistance_figure_no_props(pairs=pairs)
+#results_aggregate = resistance_figures.resistance_figure_aggregate(pairs=pairs)
+#results_two = resistance_figures.resistance_figure(pairs=pairs, num_players="two")
+#results_four = resistance_figures.resistance_figure(pairs=pairs, num_players="four")
+#
+#metric_figure.get_metrics(results_two, results_four, results_aggregate)
 
-simulation_figures.readGamesAndGenerateFigures("../../Ticket-to-Ride-Engine/output/games.txt", limit = 30)
+results_file = open('input/results.txt', 'r')
+results = eval(results_file.read())
+results_file.close()
 
-route_measures_figures.all_measures()
+def orderXbyY(X, Y):
+    ordered_X = [x for _, x in sorted(zip(Y,X), key = lambda pair: pair[0])]
+    ordered_X.reverse()
+    return ordered_X
 
-pairs = find_resistance_between_pairs()
-resistance_figures.resistance_figure_no_props(pairs=pairs)
-results_aggregate = resistance_figures.resistance_figure_aggregate(pairs=pairs)
-results_two = resistance_figures.resistance_figure(pairs=pairs, num_players="two")
-results_four = resistance_figures.resistance_figure(pairs=pairs, num_players="four")
-
-metric_figure.get_metrics(results_two, results_four, results_aggregate)
+import matplotlib.pyplot as plt
+names_by_paths = orderXbyY(X=results['names'], Y=results['path_length'])
+names_by_residuals = orderXbyY(X=results['names'], Y=results['distance'])
+total = float(len(names_by_paths))
+for name in names_by_paths:
+    i = names_by_paths.index(name) + 1
+    j = names_by_residuals.index(name) + 1
+    xi = 0
+    yi = 1 - i / total
+    xj = .1
+    yj = 1 - j / total
+    plt.plot([xi, xj], [yi, yj], c='black', linestyle='-', marker='o')
+    plt.text(x=xj+.01, y=yj-.01, s=name)
+plt.tight_layout()
+plt.axis('off')
+plt.show()
