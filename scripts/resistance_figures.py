@@ -73,11 +73,11 @@ def resistance_figure_no_props(pairs):
         'names' : names
     }
 
-def resistance_figure_aggregate(pairs):
-    xs, ys, props, names = [], [], [], []
+def resistance_figure_aggregate(pairs, cmapname):
+    xs, ys, props, names, colors = [], [], [], [], []
     win_props = []
     fig, ax = plt.subplots()
-    cmap = plt.cm.get_cmap('RdYlGn')
+    cmap = plt.cm.get_cmap(cmapname)
     keys, props_two = get_proportions("input/tickets_two.txt")
     keys, props_four = get_proportions("input/tickets_four.txt")
     props = [.5 * (props_two[i] - .25 + props_four[i] -.5) for i in range(len(keys))]
@@ -89,6 +89,7 @@ def resistance_figure_aggregate(pairs):
         names.append(edge)
         label = "{} {}".format(number, edge)
         color, current_prop = get_color(cmap=cmap, edge=edge, keys=keys, props=props)
+        colors.append(color)
         win_props += [current_prop]
         ax.annotate(number, (x,y), ha='center', va='center', fontsize=8,
                            bbox=dict(boxstyle="circle,pad=0.3", fc=color))
@@ -136,7 +137,8 @@ def resistance_figure_aggregate(pairs):
         'path_length': ys,
         'aggregate_proportion' : win_props,
         'distance' : distances,
-        'names' : names
+        'names' : names,
+        'colors' : colors
     }
 
 def resistance_figure(pairs, num_players):
