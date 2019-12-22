@@ -172,16 +172,19 @@ we simulate 1000 games where the reward for a route
 of length $k$ is $\alpha k$.
 The results appear in \cref{fig:points}.
 
-The proportion of wins of the Hungry, Path, and One
-Step Thinker strategies does not significantly
-vary with $\alpha$.
-The Hungry, Path, and One Step Thinker
-strategies do not 
+The winning proportions of the Hungry, Path, and One
+Step agents are independent of $\alpha$.
+However, the Long Route agent--which
+depends on the reward from long routes--
+performs better with higher values of $\alpha$.
+We recommend an $\alpha$ value of 
+3.5 because the One Step
+and Long Route strategies perform roughly as well at that point.
 
 \end{multicols}
-\begin{figure}
+\begin{figure}[h]
     \centering
-    \includegraphics[scale=.69]{figures/points}
+    \includegraphics[scale=.65]{figures/points}
     \caption{The proportion of wins of each of the four strategies
     by the number of points earned per train in 1000 games.}
     \label{fig:points}
