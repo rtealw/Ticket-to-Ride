@@ -1,54 +1,20 @@
-\documentclass{article}
+\documentclass[manuscript]{acmart}
 \usepackage{amsmath}
-\usepackage{fancyhdr}
-\usepackage{amssymb}
-\usepackage{amsthm}
 \usepackage{graphicx}
-\usepackage{varioref}
-\usepackage{verbatim} 
-\usepackage{multicol}
-\usepackage{enumerate}
-\usepackage[normalem]{ulem}
-%\usepackage[margin=1in]{geometry}
-\usepackage{caption}
 \usepackage{subcaption}
-\usepackage[T1]{fontenc}
-\usepackage[margin=1in]{geometry}
-\usepackage{thm-restate}
-\usepackage{enumitem}
-\usepackage{multicol}
+%\usepackage[margin=1in]{geometry}
+%\usepackage{multicol}
 \usepackage{float}
-
-
-\usepackage{mathrsfs}
-
-\usepackage{url}\urlstyle{same}
-\usepackage{xspace}
-\usepackage{thm-restate}
 
 % Nicer font
 \usepackage{mathpazo}
 
-
 % Microtype
 \usepackage{microtype}
 
-% TikZ
-\usepackage{tikz}
-\usetikzlibrary{calc}
-\usetikzlibrary{decorations.pathmorphing}
-\usetikzlibrary{decorations.markings}
-
-% Support eps figures
-\usepackage{epstopdf}
-
 % Hypertext package
 \usepackage[colorlinks = true]{hyperref}
-% Title and authors
-%\hypersetup{
-%  pdftitle = {},
-%  pdfauthor = {}
-%}
+
 % Color definitions
 \usepackage{xcolor}
 \definecolor{darkred}  {rgb}{0.5,0,0}
@@ -71,31 +37,11 @@
 \crefname{conjecture}{Conjecture}{Conjectures}
 \crefname{corollary}{Corollary}{Corollaries}
 \crefname{section}{Section}{Sections}
-%\crefname{property}{Property}{Properties}
 \crefname{appendix}{Appendix}{Appendices}
-\crefname{figure}{Fig.}{Figs.}
-\crefname{equation}{Eq.}{Eqs.}
+\crefname{figure}{Figure}{Figures}
+\crefname{equation}{Equation}{Equations}
 \crefname{table}{Table}{Tables}
 \crefname{claim}{Claim}{Claims}
-%\crefname{item}{Property}{Properties}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%
-%  N E W T H E O R E M  %
-%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{property}[theorem]{Property}
-\newtheorem*{conjecture*}{Conjecture}
-\newtheorem*{problem}{Problem}
-\newtheorem{claim}[theorem]{Claim}
-\theoremstyle{definition}
-\newtheorem*{remark}{Remark}
-\newtheorem*{example}{Example}
 
 \DeclareMathOperator{\E}{\mathrm{E}}		     % expected value
 \DeclareMathOperator{\p}{\mathrm{P}}		     % probability
@@ -106,7 +52,7 @@
 
 
 %+Title
-\title{Applications of Graph Theory and Probability in the Board Game \it{Ticket to Ride}}
+\title{Applications of Graph Theory and Probability in the Board Game Ticket to Ride}
 
 \author{R. Teal Witter \& Alex Lyford}
 
