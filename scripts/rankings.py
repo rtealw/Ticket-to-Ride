@@ -32,3 +32,4 @@ def generate_rankings(input_file='input/results.txt', output_file='../paper/figu
     plt.scatter(x=6,y=0,s=.001, c='white')
     plt.axis('off')
     plt.savefig(output_file)
+    plt.close()

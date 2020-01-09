@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 
 def generate_total_wins_plot(filename, ):
+    plt.close()
     agent_names = ["Hungry", "Path", "OneStepThinker", "LongRouteJunkie"]
     games_file = open(filename, 'r')
     stats = {
@@ -33,3 +34,4 @@ def generate_total_wins_plot(filename, ):
     plt.xlabel("Strategy")
     plt.ylabel("Win Rate")
     plt.savefig("../paper/figures/win_rates.eps")
+    plt.close()
