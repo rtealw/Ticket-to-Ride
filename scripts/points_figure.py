@@ -35,7 +35,7 @@ def plot(counts, filename, agent_names=["Hungry", "Path", "OneStepThinker", "Lon
         "Hungry" : 'Hungry',
         "Path" : 'Path',
         "OneStepThinker" : 'One Step',
-        "LongRouteJunkie" : 'Longe Route'
+        "LongRouteJunkie" : 'Long Route'
     }
     for i in range(len(agent_names)):
         color = colors[i]
