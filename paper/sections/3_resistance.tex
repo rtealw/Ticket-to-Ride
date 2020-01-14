@@ -3,15 +3,15 @@
 
 \subsection{Winning}
 An obvious strategy in \textit{Ticket to Ride} is to collect
-Destination Tickets and buy routes to connect them.
+Destination Tickets and focus on claiming routes to connect them.
 We investigate the effect of collecting Destination Tickets
 on winning the game.
 We simulate 10,000 two-player and 10,000 four-player games.
 For each Destination Ticket, we calculate the proportion of 
 games that the player holding the Destination Ticket won.
 Our results appear in \cref{fig:tickets}.
-(For example, players in two-player games with Phoenix to Portland
-won almost exactly half of their games.)
+(For example, players in two-player games with Montreal 
+to Vancouver won almost $60\%$ of their games.)
 
 \begin{figure}[h]
 \centering
@@ -33,6 +33,9 @@ would win a quarter of the time.
 
 In two-player games, there are 13 Destination Tickets 
 that win more than the expected $50\%$ of games.
+(We say that a Destination Ticket "wins" in the sense
+that the players who possesses it wins the game they
+are playing.)
 In four-player games, there are only eight Destination Tickets
 that clearly win more than the expected $25\%$ of games plus
 another four on the borderline.
@@ -46,8 +49,8 @@ The ones that win the most are Montreal to Vancouver,
 New York to Seattle, and Chicago to Los Angeles.
 
 An inspection of \cref{fig:board} shows that the paths between 
-these three Destination Tickets are some of the longest on the board 
-and include routes with the most trains.
+these three Destination Tickets include the longest routes
+on the board.
 However, to gain a better understanding of what makes some
 Destination Tickets more advantageous than others,
 we investigate their characteristics
@@ -56,15 +59,13 @@ We begin in the next subsection by developing a measure
 of the difficulty of connecting one city to another.
 
 \subsection{Effective Resistance}
-The \textit{Ticket to Ride} board can mathematically
-be interpreted as a graph where cities represent
+The \textit{Ticket to Ride} board can be mathematically
+interpreted as a graph where cities represent
 nodes and routes represent edges.
-Thus, to analyze the difficulty of connecting a
-pair of cities we can frame the problem in graph theoretic language.
-One of the most powerful and natural measures
+One of the most powerful and natural measures of connectivity
 between two nodes on a graph is effective resistance
 \cite{ellens2011effective}.
-Imagine that the \textit{Ticket to Ride} board was
+Imagine that the \textit{Ticket to Ride} board were
 a large electrical circuit with a unit current
 entering at city $a$ and leaving at city $b$.
 Effective resistance indicates
@@ -101,11 +102,13 @@ matrix $A$ where $D_{i,i}$ is the weighted degree of node $i$
 and $A_{i,j}$ is the resistance of the edges between nodes
 $i$ and $j$.)
 
-We let the weight between two cities be the number
-of trains of the route connecting them.
+We let the weight between two cities be the length
+of the route connecting them.
 In the case that there are two routes between cities,
 we let the weight be $(1/r + 1/r)^{-1}=r/2$ where
-$r$ is the number of trains of each route.
+$r$ is the length of each route.
+(There are at most two routes between any two cities
+on the \textit{Ticket to Ride} board \cref{fig:board}.)
 
 In the next subsection, we calculate the effective
 resistance of all Destination Tickets as a tool
@@ -128,18 +131,19 @@ to find what most closely correlates with winning.
 \subsection{Winning \& Effective Resistance}
 
 In \cref{fig:resistance},
-Destination Tickets are plotted by their effective resistance
-and minimum path length.
+Destination Tickets are plotted by 
+the effective resistance 
+and minimum path length of the pair of cities they specify.
 Recall that the reward for connecting a Destination Ticket
 is the length of the shortest path between its two cities.
 Since effective resistance measures the difficulty of
 connecting the two cities, the line of best fit in \cref{fig:resistance}
 indicates reward per difficulty.
 The Destination Tickets above the line of best fit are
-a "good" deal relative to the rest of the Destination Tickets
+a "good" deal relative to the rest of the Destination Tickets,
 whereas those below the line of best fit are a "bad" deal.
 
-The proportion of wins (also dubbed overall wins
+The proportion of wins (also denoted overall wins
 in \cref{fig:correlation_table} and \cref{fig:correlation_figures})
 is the difference from the expected proportion of wins
 across two- and four-player games.
@@ -153,17 +157,20 @@ We use the proportion of wins as a proxy for the desirability
 of Destination Tickets and attempt to interpret what variables
 increase player wins from \cref{fig:resistance}.
 It appears that Destination Tickets with longer minimum paths win
-more as well as Destination Tickets with a smaller effective resistance.
+more as well as Destination Tickets with 
+a smaller effective resistance.
 But the correlation between either variable and the proportion
 of wins is not clear-cut.
 
-\cref{fig:correlation_table} shows the Pearson correlation statistic
+\cref{fig:correlation_table} shows the Pearson 
+correlation coefficient
 between wins and various (possibly) related variables.
 The path length and resistance are the y- and x-axes of 
 \cref{fig:resistance}.
 The residual is the difference between the predicted
 path length (line of best fit) and the actual path length
 in \cref{fig:resistance}.
+% more intuitive and formal definition of residual
 The results indicate that path length is well correlated with wins,
 resistance is not correlated with wins, and residual is very
 well correlated with wins.
@@ -221,13 +228,13 @@ Even though it is easier to compare path length when choosing
 between Destination Tickets in real time,
 learning the most advantageous Destination Tickets may be worthwhile:
 as a general rule, Destination Tickets with a minimum path
-longer than 15 trains or those with small effective resistance
+length above 15 or those with small effective resistance
 (many short paths) outperform their counterparts.
 
 Referring to \cref{fig:resistance}, 
-we provide several explanations for why Destination Tickets 
-win more than expected.
-The Destination Tickets with more than 15 trains 
+we provide several explanations for why certain
+Destination Tickets win more than expected.
+The Destination Tickets with length greater than 15 
 enjoy high rewards and middle-of-the-pack 
 resistances.
 In addition, they benefit from the advantages of longer 
