@@ -16,13 +16,19 @@ def generate_figures(aggregate_results, var_to_name):
         plt.xlabel(var_to_name[x])
         y_name = 'Overall Wins'
         plt.ylabel(y_name)
-        plt.title('Destination Tickets by {}'.format(var_to_name[x], y_name))
+        title = 'Destination Tickets by ' + var_to_name[x]
+        r, p = get_correlation(xs, ys)
+        subtitle0 = 'Pearson coefficient: ' + str(round_sig(r, 2))
+        subtitle1 = 'p-value: ' + str(round_sig(p, 2))
+        plt.title(title + '\n' + subtitle0 + '\n' + subtitle1)
         interval = np.linspace(min(xs), max(xs), 100)
         best_fit_func = np.poly1d(np.polyfit(xs, ys, deg=1))
         plt.plot(interval, best_fit_func(interval), color="black")
         plt.savefig("../paper/figures/correlation{}.eps".format(i), bbox_inches='tight')
         plt.close()
     plt.rcParams['figure.figsize'] = old_figsize
+
+round_sig = lambda f,p: float(('%.' + str(p) + 'e') % f)
 
 def get_metrics(results, results2, results3):
     var_to_name = {
