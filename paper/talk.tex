@@ -9,7 +9,7 @@
 
 \title{Applications of Graph Theory and Probability
 in the Board Game \textit{Ticket to Ride}}
-\author{R. Teal Witter \& Alex Lyford}
+\author{R. {\color{teal} Teal} Witter* \& Alex Lyford}
 \institute{Middlebury College}
 \date{January 16, 2020}
 
@@ -35,7 +35,7 @@ in the Board Game \textit{Ticket to Ride}}
     \begin{itemize}
         \item Players with some Destination Tickets perform
         better than players with others ... why?
-        \item We use a statistical model to identify
+        \item We use regression to identify
         the best Destination Tickets.
     \end{itemize}
     
@@ -45,7 +45,7 @@ in the Board Game \textit{Ticket to Ride}}
 
 \begin{frame}{Current Route Values}
     \begin{center}
-    \renewcommand{\arraystretch}{2}
+    %\renewcommand{\arraystretch}{2}
     \begin{tabular}{| c | c | c | c | c | c | c |}
     \hline
      Route Length & 1 & 2 & 3 & 4 & 5 & 6\\
@@ -57,26 +57,17 @@ in the Board Game \textit{Ticket to Ride}}
      \hline
     \end{tabular}
     \end{center}
-\end{frame}
-
-\begin{frame}{Current Route Values: Why?}
-    Explanation: 
-    \begin{itemize}
-    \item Collecting many trains of the same 
-    color is hard\footnotemark
-    \end{itemize}
-    \vspace{.5cm}
     \pause
-    Drawbacks: 
+    Arguments for
     \begin{itemize}
-    \item Only one route can be purchased in each turn
-    \item Is it really \textit{2.5} times harder per train to 
-    collect six trains of the same color than one or two?
-    \item Collecting trains of multiple colors 
-    increases the likelihood \textit{some} desired 
-    train appears each turn
+        \item Collecting many trains of the same color is hard
     \end{itemize}
-    \footnotetext[1]{How hard??}
+    Arguments against
+    \begin{itemize}
+        \item Is it really \textit{that} hard?
+        \item Only one route can be claimed per turn
+        \item Collecting multiple colors simultaneously helps
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Games with routes of length at most $k$}
@@ -145,6 +136,9 @@ in the Board Game \textit{Ticket to Ride}}
     \end{align}
    }
    \only<3>{
+    \begin{align}
+        N_k = k + \sum_{x \in C \setminus B} I_{x,k} \nonumber
+    \end{align}
    Taking expectation,
    \begin{align}
        \E[N_k] = k + 
@@ -168,9 +162,7 @@ in the Board Game \textit{Ticket to Ride}}
    \begin{align}
        xxxbxbbxxxbxbb\dots xbxxxb \nonumber
    \end{align}
-   Then $\p(I_{x,k}=1)$--the probability
-   a particular $x$ appears before the $k^{th}$ blue
-   card--is $k/(|B| + 1)$
+   Then $\p(I_{x,k}=1)$ is $k/(|B| + 1)$
    }
    \only<5>{
     \begin{align}
@@ -225,24 +217,6 @@ in the Board Game \textit{Ticket to Ride}}
     \includegraphics[scale=.45]{figures/resistance_aggregate}
 \end{frame}
 
-\begin{frame}{What best predicts wins?}
-   \begin{figure}
-    \centering
-    \begin{subfigure}
-        \centering
-        \includegraphics[height=1.3in]{figures/correlation0}
-    \end{subfigure}
-    \begin{subfigure}
-        \centering
-        \includegraphics[height=1.3in]{figures/correlation1}
-    \end{subfigure}
-    \begin{subfigure}
-        \centering
-        \includegraphics[height=1.3in]{figures/correlation2}
-    \end{subfigure}
-    \end{figure} 
-\end{frame}
-
 \begin{frame}{Rankings by Minimum Path Length and Residual}
     \centering
     \includegraphics[scale=.2]{figures/rankings}
@@ -261,7 +235,7 @@ in the Board Game \textit{Ticket to Ride}}
     \begin{itemize}
         \item Players with some Destination Tickets perform
         better than players with others ... why?
-        \item We use a statistical model to identify
+        \item We use regression to identify
         the best Destination Tickets.
     \end{itemize}
     
@@ -269,6 +243,24 @@ in the Board Game \textit{Ticket to Ride}}
 
 \begin{frame}{Thank you!}
     Questions?
+\end{frame}
+
+\begin{frame}{Correlations with overall wins}
+   \begin{figure}
+    \centering
+    \begin{subfigure}
+        \centering
+        \includegraphics[height=1.3in]{figures/correlation0}
+    \end{subfigure}
+    \begin{subfigure}
+        \centering
+        \includegraphics[height=1.3in]{figures/correlation1}
+    \end{subfigure}
+    \begin{subfigure}
+        \centering
+        \includegraphics[height=1.3in]{figures/correlation2}
+    \end{subfigure}
+    \end{figure} 
 \end{frame}
 
 \begin{frame}{References}
