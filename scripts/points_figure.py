@@ -1,12 +1,18 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def read_file(filename, agent_names=["Hungry", "Path", "OneStepThinker", "LongRouteJunkie"]):
-    points_file = open(filename, 'r')
+def read_file(filename1, filename2, agent_names=["Hungry", "Path", "OneStepThinker", "LongRouteJunkie"]):
+    points_file1 = open(filename1, 'r')
+    points_file2 = open(filename2, 'r')
     total_counts = {key : [] for key in agent_names + ['alpha']}
     alpha_counts = {key : 0 for key in agent_names + ['total']}
 
-    all_games = [eval(game) for game in points_file]
+    all_games = []
+    for game in points_file1:
+        all_games += [eval(game)]
+    for game in points_file2:
+        all_games += [eval(game)]
+
     current_point_table = all_games[0]['point_table']
     for i in range(len(all_games) + 1):
 
@@ -45,12 +51,15 @@ def plot(counts, filename, agent_names=["Hungry", "Path", "OneStepThinker", "Lon
     plt.title("Proportion of Wins by Strategy and Points per Train")
     plt.xlabel("Points per Train (α)")
     plt.ylabel("Proportion of Wins")
-    plt.xticks(np.arange(1,5.1,step=.2))
+    plt.xticks(np.arange(1,7.1,step=.5))
     plt.ylim(0, .45)
     plt.legend()
     plt.savefig(filename)
     plt.close()
 
 def countAndPlot():
-    counts = read_file(filename='../../Ticket-to-Ride-Engine/output/point_tables.txt')
+    counts = read_file(
+        filename1='../../Ticket-to-Ride-Engine/output/point_table1.txt',
+        filename2='../../Ticket-to-Ride-Engine/output/point_table2.txt'
+    )
     plot(counts, filename="../paper/figures/points.eps")
