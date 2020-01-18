@@ -11,6 +11,7 @@ import resistance_figures
 import metric_figure
 import rankings
 import win_rates
+import completion
 
 def generate_resistance_graph(path="../graph/"):
     edge_lengths = pd.read_csv('{}edge_lengths.csv'.format(path), index_col=0)
@@ -48,3 +49,4 @@ metric_figure.get_metrics(results_two, results_four, results_aggregate)
 rankings.generate_rankings()
 
 win_rates.generate_total_wins_plot(filename="../../Ticket-to-Ride-Engine/output/games.txt")
+completion.generate_completion_fig(pairs)
