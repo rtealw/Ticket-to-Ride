@@ -106,11 +106,11 @@ def resistance_figure_aggregate(pairs, cmapname):
     plt.xlim(min(xs) * .5, max(xs) * 1.1)
     plt.ylim(min(ys) * .5, max(ys) * 1.1)
     plt.yticks(range(min(ys), max(ys)+1, 2)) # integer y axis
-    title = "Destination Tickets by Length of Minimum Path and Effective Resistance"
-    subtitle = "Colored by Proportion of Wins"
+    title = "Destination Tickets by Difficulty and Reward"
+    subtitle = "Colored by Difference from Expected Proportion of Wins"
     plt.title("{}\n{}".format(title, subtitle))
-    plt.xlabel("Effective Resistance")
-    plt.ylabel("Length of Minimum Path")
+    plt.xlabel("Difficulty (Effective Resistance)")
+    plt.ylabel("Reward (Length of Minimum Path)")
     legend = ax.legend(
         bbox_to_anchor = (1, 1.01),
         handlelength = 0, 

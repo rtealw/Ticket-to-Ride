@@ -14,7 +14,7 @@ def generate_figures(aggregate_results, var_to_name):
             plt.xticks(np.arange(min(xs), max(xs)+1, 5))
         plt.scatter(x=xs, y= ys, color="black")
         plt.xlabel(var_to_name[x])
-        y_name = 'Overall Wins'
+        y_name = 'Proportion of Wins'
         plt.ylabel(y_name)
         title = 'Destination Tickets by ' + var_to_name[x]
         r, p = get_correlation(xs, ys)
@@ -84,6 +84,7 @@ def get_metrics(results, results2, results3):
     table.scale(2,4)
     ax.axis('off')
     plt.savefig("../paper/figures/pearsons_table.eps", bbox_inches='tight')
+    plt.close()
     results_file = open("input/results.txt", "w")
     results_file.write(str(results))
     results_file.close()

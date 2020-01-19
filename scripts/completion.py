@@ -32,7 +32,7 @@ def get_proportions_and_resistances(pairs, filename="../../Ticket-to-Ride-Engine
 
 def generate_completion_fig(pairs):
     old_figsize = plt.rcParams['figure.figsize']
-    plt.rcParams["figure.figsize"] = [6, 5]
+    plt.rcParams["figure.figsize"] = [4, 3]
     y, x = get_proportions_and_resistances(pairs)
     plt.scatter(x=x, y=y, color="black")
     plt.xlabel("Resistance")
@@ -47,6 +47,6 @@ def generate_completion_fig(pairs):
     best_fit_func = np.poly1d(np.polyfit(x, y, deg=1))
     interval = np.linspace(min(x), max(x), 100)
     plt.plot(interval, best_fit_func(interval), color="black")
-    plt.savefig("../paper/figures/completion.eps")
+    plt.savefig("../paper/figures/completion.eps", bbox_inches='tight')
     plt.close()
     plt.rcParams['figure.figsize'] = old_figsize
