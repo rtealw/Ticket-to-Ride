@@ -122,7 +122,6 @@ to find what most closely correlates with winning.
 
 Our goal is to identify why certain Destination
 Tickets win more than others.
-
 We plot Destination Tickets in \cref{fig:resistance}
 by the difficulty of connecting their cities (effective
 resistance) against their reward.
@@ -146,147 +145,69 @@ two-player and $17\%$ of four-player games) while
 New York/Seattle has value .09 (winning $59\%$ of
 two-player and $34\%$ of four-player games).
 
+Let a Destination Ticket's residual be the difference
+between its predicted reward and actual reward.
+For the same difficulty, a Destination Ticket
+with a high residual has a greater reward
+than one with a low residual.
+Clearly, the residuals of their Destination Tickets
+should affect whether players win: greater point values
+increase the number of points relative to the expended
+resources.
 
-
-A Destination Ticket's color indicates the difference
-between its expected proportion of wins.
-For example, the Destination Ticket New York/Seattle
-(marked as 30) has value .09 because, on average,
-players with New York/Seattle win $59\%$ of two-player
-games and $34\%$ of four-player games.
-
-%%%%%%%%%%%%%
-
-In \cref{fig:resistance},
-Destination Tickets are plotted by 
-the effective resistance 
-and minimum path length of the pair of cities they specify.
-Recall that the reward for connecting a Destination Ticket
-is the length of the shortest path between its two cities.
-Since effective resistance measures the difficulty of
-connecting the two cities, the line of best fit in \cref{fig:resistance}
-indicates reward per difficulty.
-The Destination Tickets above the line of best fit are
-a "good" deal relative to the rest of the Destination Tickets,
-whereas those below the line of best fit are a "bad" deal.
+We compare how well residual 
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=.6]{figures/resistance_aggregate}
-    \caption{Destination Tickets plotted by their effective
-    resistance and minimum path length and colored
-    by overall proportion of wins.
-    The line of best fit gives an approximation of the
-    Destination Tickets that have a higher reward per difficulty
-    (above the line).
+    \caption{Destination Tickets plotted by the
+    difficulty of connecting their cities and the reward.
+    The line of best fit predicts the value of a Destination
+    Ticket based on how challenging its cities
+    are to connect.
     Note: the $9^{\text{th}}$ Destination Ticket 
     is obscured by the $11^{\text{th}}$.}
     \label{fig:resistance}
 \end{figure}
 
-The proportion of wins (also denoted overall wins
-in \cref{fig:correlation_table} and \cref{fig:correlation_figures})
-is the difference from the expected proportion of wins
-across two- and four-player games.
-For example, a Destination Ticket with a value of .05 indicates
-that players with that Destination Ticket 
-win on average $30\%$ of four-player games
-(rather than the expected $25\%$) and $55\%$ of 
-two-player games (rather than the expected $50\%$).
-
-We use the proportion of wins as a proxy for the desirability
-of Destination Tickets and attempt to interpret what variables
-increase player wins from \cref{fig:resistance}.
-It appears that Destination Tickets with longer minimum paths win
-more as well as Destination Tickets with 
-a smaller effective resistance.
-But the correlation between either variable and the proportion
-of wins is not clear-cut.
-
-\cref{fig:correlation_table} shows the Pearson 
-correlation coefficient
-between wins and various (possibly) related variables.
-The path length and resistance are the y- and x-axes of 
-\cref{fig:resistance}.
-The residual is the difference between the predicted
-path length (line of best fit) and the actual path length
-in \cref{fig:resistance}.
-% more intuitive and formal definition of residual
-The results indicate that path length is well correlated with wins,
-resistance is not correlated with wins, and residual is very
-well correlated with wins.
-\cref{fig:correlation_figures} shows the data points and
-their relationship to wins summarized in
-in the last column of \cref{fig:correlation_table}.
-
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
-    \includegraphics[scale=.12]{figures/pearsons_table.png}
-    \caption{The Pearson correlation statistic between
-    the win proportion of Destination Tickets
-    and measures of difficulty.
-    A single asterisk (in light green) indicates a p-value
-    below 1E-2. Double asterisks (in green) indicate a
-    p-value below 1E-4. Triple asterisks (in dark green)
-    indicate a p-value below 1E-6.}
-    \label{fig:correlation_table}
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{figures/correlation0}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{figures/correlation2}
+    \end{subfigure}%
+    \caption{Destination Tickets by the proportion of wins
+    and path length and residual, respectively.
+    The Pearson p-values imply that residual
+    correlates more closely with winning than
+    path length.}
+    \label{fig:correlation}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \begin{subfigure}[t]{0.33\textwidth}
+    \begin{subfigure}[t]{0.5\textwidth}
         \centering
-        \includegraphics[height=1.7in]{figures/correlation0}
+        \includegraphics[height=2in]{figures/correlation1}
     \end{subfigure}%
     ~ 
-    \begin{subfigure}[t]{0.33\textwidth}
+    \begin{subfigure}[t]{0.5\textwidth}
         \centering
-        \includegraphics[height=1.7in]{figures/correlation1}
+        \includegraphics[height=2in]{figures/completion}
     \end{subfigure}%
-    ~ 
-    \begin{subfigure}[t]{0.33\textwidth}
-        \centering
-        \includegraphics[height=1.7in]{figures/correlation2}
-    \end{subfigure}%
-    \caption{Destination Tickets by the
-    difference between the expected proportion of wins
-    and (possibly) related variables.
-    The last column of \cref{fig:correlation_figures}
-    indicates how closely the lines of best fit
-    model Destination Tickets.}
-    \label{fig:correlation_figures}
+    \caption{Destination Tickets by the resistance and
+    proportion of wins and completions, respectively.
+    While it does not correlate well with
+    winning, resistance is closely related to
+    whether a Destination Ticket gets completed.
+    }
+    \label{fig:completion}
 \end{figure}
-
-While path length is a good predictor 
-of which Destination Tickets win, 
-the residual from the model built from effective resistance
-is even better (\cref{fig:correlation_table} and
-\cref{fig:correlation_figures}).
-\cref{fig:rankings} shows the change in rankings
-between path length and residual.
-
-Even though it is easier to compare path length when choosing
-between Destination Tickets in real time,
-learning the most advantageous Destination Tickets may be worthwhile:
-as a general rule, Destination Tickets with a minimum path
-length above 15 or those with small effective resistance
-(many short paths) outperform their counterparts.
-
-Referring to \cref{fig:resistance}, 
-we provide several explanations for why certain
-Destination Tickets win more than expected.
-The Destination Tickets with length greater than 15 
-enjoy high rewards and middle-of-the-pack 
-resistances.
-In addition, they benefit from the advantages of longer 
-routes discussed in \cref{sec:overvalued}.
-The remaining Destination Tickets--below or slightly 
-above the line of best fit--seem to be more affected
-by resistance: the higher the resistance, the
-lower the proportion of wins.
-Perhaps because the resistance between these pairs of cities
-is roughly comparable, Destination Tickets that 
-can be connected more easily help players more.
 
 \begin{figure}[H]
     \centering
