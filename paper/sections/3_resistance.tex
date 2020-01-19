@@ -120,6 +120,43 @@ to find what most closely correlates with winning.
 \subsection{Winning \& Effective Resistance}
 \label{sec:winning_and_resistance}
 
+Our goal is to identify why certain Destination
+Tickets win more than others.
+
+We plot Destination Tickets in \cref{fig:resistance}
+by the difficulty of connecting their cities (effective
+resistance) against their reward.
+The line of best fit gives the predicted reward
+as a function of difficulty.
+We would predict, for example, that the reward for 
+connecting the cities
+in a Destination Ticket with effective resistance .4 would
+be 12 points.
+However, completing the $2^\text{nd}$ Destination Ticket 
+Houston/Kansas City earns 5 points whereas
+completing the $30^\text{th}$ Destination Ticket
+New York/Seattle earns 22 points even though
+both have resistance approximately .4.
+We conclude that Houston/Kansas City is very undesirable
+and New York/Seattle is very desirable.
+Coloring by the difference from the expected proportion
+of wins confirms our conclusion:
+Houston/Kansas City has value -.08 (winning $42\%$ of
+two-player and $17\%$ of four-player games) while
+New York/Seattle has value .09 (winning $59\%$ of
+two-player and $34\%$ of four-player games).
+
+
+
+A Destination Ticket's color indicates the difference
+between its expected proportion of wins.
+For example, the Destination Ticket New York/Seattle
+(marked as 30) has value .09 because, on average,
+players with New York/Seattle win $59\%$ of two-player
+games and $34\%$ of four-player games.
+
+%%%%%%%%%%%%%
+
 In \cref{fig:resistance},
 Destination Tickets are plotted by 
 the effective resistance 
@@ -142,8 +179,8 @@ whereas those below the line of best fit are a "bad" deal.
     The line of best fit gives an approximation of the
     Destination Tickets that have a higher reward per difficulty
     (above the line).
-    Note: the $9^{th}$ Destination Ticket 
-    is obscured by the $11^{th}$.}
+    Note: the $9^{\text{th}}$ Destination Ticket 
+    is obscured by the $11^{\text{th}}$.}
     \label{fig:resistance}
 \end{figure}
 
