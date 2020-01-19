@@ -16,7 +16,7 @@ def generate_figures(aggregate_results, var_to_name):
         plt.xlabel(var_to_name[x])
         y_name = 'Proportion of Wins'
         plt.ylabel(y_name)
-        title = 'Destination Tickets by ' + var_to_name[x]
+        title = 'Destination Tickets by ' + var_to_name[x] + ' and Wins'
         r, p = get_correlation(xs, ys)
         subtitle0 = 'Pearson coefficient: ' + str(round_sig(r, 2))
         subtitle1 = 'p-value: ' + str(round_sig(p, 2))
