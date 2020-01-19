@@ -1,24 +1,70 @@
-\newpage
 \section{Discussion}
-this is what we did
-
-\todo{discuss}
+We explain how long routes
+are overvalued and can be exploited to easily
+win with a very simple strategy.
+We then suggest a route scoring scheme that both corresponds
+to the resources needed to acquire routes and ensures
+that \textit{Ticket to Ride} stays competitive
+between several advanced strategies.
+We analyze why players
+with particular Destination Tickets perform better
+than others.
+We investigate effective resistance as a measure
+for how difficult the cities on Destination Tickets
+are to connect and compare resistance (difficulty)
+against path length (reward).
+The residual of resistance and path length
+appears as the best predictor of winning and we provide
+a ranking as a tool for choosing
+between Destination Tickets in game play.
 
 \subsection{Limitations \& Future Work}
-Simulations are limited by four
-simple heuristic agents: affects
-$\alpha$ recommendation
+We rely heavily on \textit{Ticket to Ride}
+simulations but are limited to four fairly simple
+heuristic strategies.
+If there exist substantially better strategies,
+our scoring recommendation and comparison
+of Destination Tickets may be inaccurate.
+Future work could explore additional \textit{Ticket to Ride}
+and compare them to the four we used.
 
-Only on USA map, board specific results
-Different maps perform differently
-\cite{de2017playtesting}
+There are two glaring nuances we ignored:
+The first is that collecting Train Car cards
+is more complicated than we assume.
+In addition to choosing two cards from
+some combination of the five face-up cards and deck,
+players also have the choice of a single 'wild' card
+from the face-up cards. 
+This option and the existence of wild
+cards complicate the way we discuss turns in terms
+of the optimal games with routes of at most length $k$
+and the expected cards until $k$ of a particular color
+appear.
+The second nuance is that some routes can be claimed
+with Train Car cards of any color (as long as all Train
+Car cards are the same color).
+These routes are easier to connect than their counterparts
+of the same length and affect our resistance analysis.
+Future work could take into account both complications.
 
-Different maps for future work
+Our route value recommendations and
+Destination Ticket rankings are specific to the USA map.
+Future work may explore how our analysis
+applies to non-USA versions such as Europe,
+India, and the more than 20 other maps listed on the
+Days of Wonder website.
+(Simulations from Silva et al. indicate this
+is a particularly productive avenue because 
+their four heuristic strategies perform radically differently
+on other maps \cite{de2017playtesting}.)
 
-Adjust Destination Ticket rewards
-in addition to route values
-
-Take locomotives into account
+We only explore changing the reward for routes.
+Future work could analyze changing the reward for
+Destination Tickets in conjunction with the
+reward for routes.
+Such work would likely lead to a more
+comprehensive and robust re-calibration
+\textit{Ticket to Ride} game play.
 
 \subsection{Acknowledgements}
 The authors would like to thank Bill Peterson for

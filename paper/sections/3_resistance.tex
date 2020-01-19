@@ -1,6 +1,5 @@
-\newpage
 \section{Destination Tickets}
-
+\label{sec:tickets}
 \subsection{Winning}
 \label{sec:winning}
 An obvious strategy in \textit{Ticket to Ride} is to collect
@@ -145,18 +144,6 @@ two-player and $17\%$ of four-player games) while
 New York/Seattle has value .09 (winning $59\%$ of
 two-player and $34\%$ of four-player games).
 
-Let a Destination Ticket's residual be the difference
-between its predicted reward and actual reward.
-For the same difficulty, a Destination Ticket
-with a high residual has a greater reward
-than one with a low residual.
-Clearly, the residuals of their Destination Tickets
-should affect whether players win: greater point values
-increase the number of points relative to the expended
-resources.
-
-We compare how well residual 
-
 \begin{figure}[h]
     \centering
     \includegraphics[scale=.6]{figures/resistance_aggregate}
@@ -169,6 +156,24 @@ We compare how well residual
     is obscured by the $11^{\text{th}}$.}
     \label{fig:resistance}
 \end{figure}
+
+Let a Destination Ticket's residual be the difference
+between its predicted reward and actual reward.
+For the same difficulty, a Destination Ticket
+with a high residual has a greater reward
+than one with a low residual.
+Clearly, the residuals of their Destination Tickets
+should affect whether players win: greater point values
+increase the number of points relative to the expended
+resources.
+We compare how closely residual and path length
+correlate with wins in \cref{fig:correlation}.
+While both variables have low Pearson p-values,
+the residual's is substantially lower.
+We conclude that residual is a better metric
+of finding advantageous Destination Tickets
+than simply the minimum length path between
+cities.
 
 \begin{figure}[H]
     \centering
@@ -189,25 +194,15 @@ We compare how well residual
     \label{fig:correlation}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering
-        \includegraphics[height=2in]{figures/correlation1}
-    \end{subfigure}%
-    ~ 
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering
-        \includegraphics[height=2in]{figures/completion}
-    \end{subfigure}%
-    \caption{Destination Tickets by the resistance and
-    proportion of wins and completions, respectively.
-    While it does not correlate well with
-    winning, resistance is closely related to
-    whether a Destination Ticket gets completed.
-    }
-    \label{fig:completion}
-\end{figure}
+A ranking of Destination Tickets by both residual (squares)
+and path length (circles) appears in \cref{fig:rankings}.
+Based on the results in \cref{fig:correlation},
+we recommend the residual order as a method for choosing
+Destination Tickets.
+The relative merit of the residual ranking is confirmed
+by its better coloring of Destination Tickets
+(most notably the least successful Destination Ticket
+Boston/Miami drops substantially in the residual order).
 
 \begin{figure}[H]
     \centering
@@ -222,3 +217,41 @@ We compare how well residual
     \label{fig:rankings}
 \end{figure}
 
+A natural follow-up question to the comparison
+between residual and path length is how closely
+resistance correlates with wins.
+\cref{fig:completion} indicates that
+resistance does not correlate with wins at all.
+This should come as no surprise: resistance approximates
+how easily a player can complete a Destination Ticket
+but the value of the Destination Ticket (relative
+to the difficulty) is what determines how well
+a player fairs in the game.
+We can confirm our analysis by plotting Destination
+Tickets by their resistance and the proportion
+of games where they are completed.
+The results, also in \cref{fig:completion}, confirm
+that resistance is an excellent measure of difficulty
+as we suspected.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{figures/correlation1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{figures/completion}
+    \end{subfigure}%
+    \caption{Destination Tickets by the resistance and
+    proportion of wins and proportion of completions,
+    respectively.
+    While it does not correlate well with
+    winning, resistance is closely related to
+    whether a Destination Ticket gets completed.
+    }
+    \label{fig:completion}
+\end{figure}
+ 
