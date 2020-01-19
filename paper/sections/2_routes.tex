@@ -1,11 +1,15 @@
 \newpage
 \section{Value of Routes}
-\subsection{Longer Routes are Overvalued}\label{sec:overvalued}
+\subsection{Longer Routes are Overvalued}
+\label{sec:overvalued}
 The reward for owning routes substantially 
 increases for longer routes as observed in 
 \cref{table:current_value}.
-The ostensible reason for the increasing value per train is that
-it takes much more time to collect longer routes than shorter routes.
+The ostensible reason for the 
+increasing value per train is that
+it takes much more time to collect
+the cards needed to claim longer
+routes than shorter routes.
 However, in \cref{sec:collecting_cards} we show that the expected 
 number of turns to collect $k$ cards of a specific
 color is linear in relation to $k$
@@ -69,9 +73,9 @@ of the same color.
     \end{tabular}
     \vspace{.5cm}
     \caption{Optimal games that can be played with
-    routes of at most length $k$. At best,
-    23 turns must be spent collecting all 45 train car
-    cards.}
+    routes of at most length $k$. At least 
+    23 turns must be spent collecting all
+    45 train car cards.}
     \vspace{-.75cm}
     \label{table:k_games}
 \end{table}
@@ -88,7 +92,8 @@ may subtract from the total score unless they are easily
 connected with routes of length six.
 
 \subsection{Expected Cards to Build a
-Route}\label{sec:collecting_cards}
+Route}
+\label{sec:collecting_cards}
 Recall that claiming a route of length $k$ requires
 $k$ cards of one particular color.
 Our goal is to find the random variable $N_k$ that
@@ -133,7 +138,8 @@ so we take the expectation of $N_k$ and distribute
 over addition via linearity of expectation.
 Then
 \begin{align} \label{eq:expected_card}
-    \E[N_k] = \E[k] + |C \setminus B| \times \E[I_{k,x}].
+    \E[N_k] = \E[k] + 
+    \left( |C| - |B| \right) \times \E[I_{k,x}].
 \end{align}
 Since $k$ is fixed, $\E[k]$ is simply $k$.
 Since $B$ is a subset of $C$ and both sets are fixed,
@@ -150,8 +156,6 @@ are uniformly distributed across the $|B| + 1$ sequences:
 it is as likely for card $x \in C \setminus B$ to be in any one sequence
 as any other.
 
-Now think of whether card $x$ appears before the $\kth$
-blue as a result of which sequence $x$ appears in.
 When looking for only one blue card,
 we see that card $x$ appears before the first blue if and only if
 $x$ is in the first sequence.
@@ -160,7 +164,8 @@ the probability that $x$ appears before the first blue $\p(I_{1,x})$
 is $1/(|B| + 1)$.
 Similarly, the probability that $x$ appears before the second blue
 $\p(I_{2,x})$ is $2/(|B| + 1)$.
-By extension, the probability that $x$ appears before the $\kth$
+By extension, the probability that $x$
+appears before the $\kth$ blue
 $\p(I_{k,x})$ is $k/(|B| + 1)$.
 
 Recall that $I_{k,x}$ takes value 1 if $x$ appears before the 
@@ -168,20 +173,22 @@ $\kth$ blue and 0 otherwise.
 Then, conditioning on $I_{k,x}$, we write its expectation
 \begin{align} \label{eq:expected_indicator}
     \E[I_{k,x}] &= 1 \times \p(I_{k,x})
-    + 0 \times (1-\p(I_{k,x}) \nonumber \\
-    &=\p(I_{k,x}) = \frac{k}{|B| + 1}
+    + 0 \times (1-\p(I_{k,x})) 
+    =\p(I_{k,x}) = \frac{k}{|B| + 1}.
 \end{align}
-Substituting \cref{eq:expected_indicator} in \cref{eq:expected_card},
+Substituting \cref{eq:expected_indicator} into
+\cref{eq:expected_card},
 we have
 \begin{align}
-    \E[N_k] &= k + |C \setminus B| \times \left(\frac{k}{|B| + 1}\right)
-    \nonumber \\
-    &= \left(1 + \frac{|C| - |B|}{|B| + 1} \right)k. \nonumber
+    \E[N_k] &= k + \left( |C| - |B| \right) 
+    \times \left(\frac{k}{|B| + 1}\right)
+    = \left(1 + \frac{|C| - |B|}{|B| + 1} \right)k. \nonumber
 \end{align}
-and, by plugging in the values of $|C|$ and $|B|$,
+and, by plugging in the total number of cards
+$|C|$ and total number of blue cards $|B|$,
 \begin{align}
-    \E[N_k] &= \left(1 + \frac{110 - 12}{12 + 1} \right)k \nonumber \\
-    &= \frac{111}{13}k. \nonumber
+    \E[N_k] &= \left(1 + \frac{110 - 12}{12 + 1} \right)k
+    = \frac{111}{13}k. \nonumber
 \end{align}
 While  $111/13$ has no obvious units or interpretation,
 we have learned that $\E[N_k]$ is proportional to $k$.
@@ -189,25 +196,23 @@ That is, the expected number of cards needed to
 purchase a route is linearly related to the length of the route.
 
 \subsection{Optimal Route Value via Simulations}
-We contend that the reward for purchasing a route 
-should be linearly related to the effort expended to do so.
+\label{sec:alpha}
 Using the number of cards needed to purchase a route 
 as a proxy for effort, it is clear from \cref{sec:collecting_cards}
 that the reward for a route should be proportional to
 its length.
-However, we do not know the ideal value of the constant $\alpha$
-for $\E[N_k] = \alpha k$.
-
+Let $\alpha$ be the points per train
+so that $\E[N_k] = \alpha k$.
 In order to choose a good $\alpha$, we simulate 
 \textit{Ticket to Ride} games and track how various
 strategies perform.
-For each $\alpha$ between 1 and 5 in .2 increments,
+For each $\alpha$ between 1 and 7 in .2 increments,
 we simulate 1000 games where the reward for a route
 of length $k$ is $\alpha k$.
 The results appear in \cref{fig:points}.
 
 It is evident that the Long Route agent
-wins more as the points per train increase.
+wins more as $\alpha$ increases.
 The Hungry, Path, and One Step agents seem
 to distribute the games they otherwise
 would have won equitably.
@@ -218,12 +223,14 @@ However, the game would be ostensibly more exciting if the
 three best strategies--Hungry, One Step,
 and Long Route--are closely tied.
 Thus we recommend an $\alpha$ value somewhere
-between 3.5 and 5.
+between 3.5 and 5.5.
 
 \begin{figure}[h]
     \centering
     \includegraphics[scale=.65]{figures/points}
-    \caption{The proportion of wins of each of the four strategies
-    by the number of points earned per train in 1000 games.}
+    \caption{The proportion of wins
+    of each of the four strategies
+    by the number of points
+    earned per train in 1000 games.}
     \label{fig:points}
 \end{figure}

@@ -26,11 +26,11 @@ and a combinatorial argument \cite{chvatil2015}.
 
 Another example of a game with mathematical underpinnings is
 the board game \textit{Ticket to Ride} \cite{moon2004ticket}. 
-Players race to connect 
+In thi game, players race to connect 
 cities and build railroads on a map of the U.S.
 Mathematically, the board
 can be thought of as a graph where
-cities represent vertices and the
+cities represent nodes and the
 routes between them represent edges.
 The educational implications of \textit{Ticket to Ride}
 have been extensively studied.
@@ -59,7 +59,6 @@ is played and experiment with new maps and decks
 We extend the mathematical interpretations of
 \textit{Ticket to Ride} to devise better player strategies
 and a better scoring scheme.
-
 To investigate a better way to assign points for building routes,
 we use a clever application of indicator random variables.
 Our approach yields the expected time until certain moves
@@ -68,18 +67,20 @@ We then argue that this expected time should be proportional
 to the reward for these moves.
 
 To investigate the difficulty of connecting pairs of cities,
-we use effective resistance and a statistical model.
-In graph theory, effective resistance is a measure of the 
-difficulty an electrical current undergoes to travel
+we use effective resistance and linear regression.
+Effective resistance is a measure of the 
+difficulty an electrical current
+undergoes to travel
 between one node and another.
 We implement two existing algorithms to calculate
 the effective resistances between nodes
-\cite{ellens2011effective, wu2004theory}
-and apply them to the \textit{Ticket to Ride} board.
+and apply them to the \textit{Ticket to Ride}
+board \cite{ellens2011effective, wu2004theory}.
 By comparing the effective resistance, the reward
 of collecting a pair of cities, and the most successful
 pairs of cities in simulated games, we suggest
-strategies for players to pick the best cities.
+strategies for players to pick the best cities
+to connect.
 
 The overarching question of this work is as follows:
 What mathematical structure in \textit{Ticket to Ride}
@@ -91,8 +92,9 @@ player strategies and propose a better scoring scheme.
 
 \subsection{\textit{Ticket to Ride} Gameplay}
 
-\textit{Ticket to Ride} is a a board game for two to five
-players and the goal for each player is to collect
+\textit{Ticket to Ride} is a board game 
+for two to five players.
+The goal is to collect
 the most points by the end of the game.
 There are three ways players may accumulate points:
 First, a player receives points for building routes
@@ -103,7 +105,8 @@ according to \cref{table:current_value}.
 Second, a player receives points for building
 a set of routes that connect two cities specified
 on a Destination Ticket.
-(A player must possess the corresponding Destination Ticket to earn
+(A player must possess the 
+corresponding Destination Ticket to earn
 points for connecting two cities.)
 Finally, a player receives points for building
 the longest path of routes at the end of the game.
@@ -117,22 +120,30 @@ of routes and may only use a single route exactly once.)
 \label{fig:board}
 \end{figure}
 
-Each player begins the game with four random Train Car cards.
+Each player begins the game with four 
+colored Train Car cards.
 These cards are used to buy routes.
-(There are 110 cards: 12 of eight colors and 14 'wild' cards
+(There are 110 cards: 12 cards of each of eight 
+colors and 14 'wild' cards
 that can stand in for any color.)
 For example, a player can use four pink Train Car cards to purchase
 the route between Charleston and Miami
 at the bottom right corner of \cref{fig:board}.
-At the beginning of the game 
-each player also receives three Destination Ticket cards.
-Two cities and a reward are specified on each Destination Ticket.
-Players choose either two or three of these cards and
+At the beginning of the game,
+each player also receives three 
+Destination Ticket cards.
+Each Destination Ticket specifies
+two cities and the reward for connecting them
+(the reward is the length of the shortest path).
+Players choose either two or three of 
+these cards and
 receive points based on whether
-or not they complete the Destination Ticket:
-if they connect the cities then they add the point reward to their
-total score and
-if they did not connect the cities by the end of the game they
+or not they complete the Destination Tickets
+in their hand:
+if they connect the cities then 
+they add the reward to their total score and
+if they did not connect the 
+cities by the end of the game they
 subtract the points from their total score.
 
 Players take one of three actions each turn.
@@ -164,14 +175,15 @@ For simulated four-player games, we include each of
 Silva et al.'s four agent types:
 The Destination Hungry Agent chooses 
 Destination Tickets at the beginning of the
-game--with an emphasis on Destination 
-Tickets that are geographically close--
-and tries to connect them for the rest of the game.
+game---with an emphasis on Destination 
+Tickets that are geographically close---and 
+tries to connect them 
+for the rest of the game.
 The Route Focused Agent works toward 
-a longer Destination Ticket then claims longer routes.
+a longer Destination Ticket, then claims longer routes.
 The One Step Agent operates by choosing 
 the most advantageous move at each
-step without a long term strategy.
+step without a long-term strategy.
 The Long Route Agent claims 
 longer routes (defined as four trains or more)
 with a preference for routes that help 
@@ -183,4 +195,32 @@ Github repository is publicly available online
 \cite{witter2019}.
 
 \subsection{Overview}
-\todo{view over}
+This paper is split into two parts:
+the first part analyzes routes and their value
+in the game while the second part analyzes
+Destination Tickets and what makes certain ones
+more advantageous for players than others.
+In section \cref{sec:overvalued}, we explain
+how long routes are overvalued and can be exploited
+to easily win.
+As a solution, \cref{sec:collecting_cards} presents a new
+scoring scheme for routes based on the expected time
+to collect routes of different lengths.
+We conclude that the scoring should be linear
+to the length of the route but there is no obvious
+point value per train.
+In \cref{sec:alpha}, we simulate games to identify
+the point value per train that maximizes the 
+number of competitive strategies.
+In \cref{sec:winning}, we begin our analysis 
+of Destination Tickets by giving a cursory
+explanations of what makes some Destination Tickets 
+more successful than others.
+In \cref{sec:resistance}, we introduce effective
+resistance as a measure for how difficult a Destination
+Ticket's pair of cities are to connect.
+Finally in \cref{sec:winning_and_resistance},
+we analyze Destination Tickets by the difference 
+between how difficult they are to connect and their value.
+We present a ranking by this "residual" and suggest 
+players choose Destination Tickets in order.
