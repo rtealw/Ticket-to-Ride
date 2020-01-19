@@ -36,7 +36,7 @@ def generate_completion_fig(pairs):
     y, x = get_proportions_and_resistances(pairs)
     plt.scatter(x=x, y=y, color="black")
     plt.xlabel("Resistance")
-    plt.ylabel("Completions")
+    plt.ylabel("Proportion of Completions")
 
     round_sig = lambda f,p: float(('%.' + str(p) + 'e') % f)
     title = "Destination Tickets by Resistance and Completions"
