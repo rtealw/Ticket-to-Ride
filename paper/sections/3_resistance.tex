@@ -1,6 +1,6 @@
 \section{Destination Tickets}
 \label{sec:tickets}
-\subsection{Winning}
+\subsection{Proportions of Wins}
 \label{sec:winning}
 An obvious strategy in \textit{Ticket to Ride} is to collect
 Destination Tickets and focus on claiming routes to connect them.
@@ -112,11 +112,44 @@ $r$ is the length of each route.
 on the \textit{Ticket to Ride} board 
 in \cref{fig:board}.)
 
-In the next subsection, we calculate the effective
-resistance of all Destination Tickets as a tool
-to find what most closely correlates with winning.
+A natural question is how well Destination Tickets'
+effective resistance correlates with wins.
+As evident in the first subfigure of \cref{fig:completion},
+resistance is not related to winning.
+But resistance is closely correlated with completing a route
+as seen in the second subfigure.
+Clearly, resistance is an excellent measure
+of the difficulty of connecting a pair of cites:
+the harder a pairs of cities is to connect, the
+lower the proportion of completions.
 
-\subsection{Winning \& Effective Resistance}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{figures/correlation1}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \includegraphics[height=2in]{figures/completion}
+    \end{subfigure}%
+    \caption{Destination Tickets by the resistance and
+    proportion of wins and proportion of completions,
+    respectively.
+    While it does not correlate well with
+    winning, resistance is closely related to
+    whether a Destination Ticket gets completed.
+    }
+    \label{fig:completion}
+\end{figure}
+
+The poor relationship between resistance and wins
+and the strong relationship between resistance and
+completions motivates our analysis in
+\cref{sec:winning_and_resistance}.
+
+\subsection{Reward per Difficulty}
 \label{sec:winning_and_resistance}
 
 Our goal is to identify why certain Destination
@@ -215,43 +248,5 @@ Boston/Miami drops substantially in the residual order).
     Lines indicate the change in rank between
     the two orderings.}
     \label{fig:rankings}
-\end{figure}
-
-A natural follow-up question to the comparison
-between residual and path length is how closely
-resistance correlates with wins.
-\cref{fig:completion} indicates that
-resistance does not correlate with wins at all.
-This should come as no surprise: resistance approximates
-how easily a player can complete a Destination Ticket
-but the value of the Destination Ticket (relative
-to the difficulty) is what determines how well
-a player fairs in the game.
-We can confirm our analysis by plotting Destination
-Tickets by their resistance and the proportion
-of games where they are completed.
-The results, also in \cref{fig:completion}, confirm
-that resistance is an excellent measure of difficulty
-as we suspected.
-
-\begin{figure}[H]
-    \centering
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering
-        \includegraphics[height=2in]{figures/correlation1}
-    \end{subfigure}%
-    ~ 
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering
-        \includegraphics[height=2in]{figures/completion}
-    \end{subfigure}%
-    \caption{Destination Tickets by the resistance and
-    proportion of wins and proportion of completions,
-    respectively.
-    While it does not correlate well with
-    winning, resistance is closely related to
-    whether a Destination Ticket gets completed.
-    }
-    \label{fig:completion}
 \end{figure}
  
